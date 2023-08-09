@@ -1,0 +1,22 @@
+.button {
+  align-items: center;
+  background-color: #25a7fd;
+  display: flex;
+  justify-content: center;
+  padding: 1.5vh 4vh;
+  margin-left: -4vh;
+  width: 140px;
+}
+
+.button .text-wrapper {
+  color: #000000;
+  font-family: "NanumSquareRound-Bold", Helvetica;
+  font-size: 3vh;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
