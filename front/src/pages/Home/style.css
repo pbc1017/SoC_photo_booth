@@ -4,40 +4,44 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  position: fixed;
+  align-items: center; 
+  margin: 0 -8px;
 }
 
 .home .div {
   background-color: #ffffff;
   border: 1px none;
-  height: 100%;
+  height: 100vh; /* 혹시나 Custom Property 지원 안하는 브라우저를 위한 복귀점(Fallback) */
+  height: calc(var(--vh, 1vh) * 100);
   position: relative;
-  width: 390px;
+  width: 400px;
 }
 
 .home .button-instance {
-  left: 125px !important;
+  /* left: 30% !important; */
+  left: 150px;
+  width: 150px;
   position: absolute !important;
-  top: 74vh !important;
-}
-
-.home .design-component-instance-node {
-  margin-left: unset !important;
-  margin-right: unset !important;
+  top: 74% !important;
 }
 
 .home .button-2 {
   background-color: #e4f0ff !important;
-  left: 125px !important;
+  left: 150px;
+  width: 150px;
   position: absolute !important;
-  top: 83vh !important;
+  top: 83% !important;
 }
 
 .home .h-1 {
   color: #000000;
   font-family: "NanumSquareRound-Light", Helvetica;
   font-size: 12vh;
+  font-size: calc(var(--vh, 1vh) * 12);
   font-weight: 300;
   height: 10vh;
+  height: calc(var(--vh, 1vh) * 10);
   left: 101px;
   letter-spacing: 0;
   line-height: normal;
@@ -48,10 +52,10 @@
 }
 
 .home .element {
-  height: 30vh;
+  height: 30%;
   left: 104px;
   object-fit: contain;
   position: absolute;
-  top: 40vh;
+  top: 40%;
   width: 182px;
 }

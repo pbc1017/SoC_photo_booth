@@ -3,9 +3,12 @@
   background-color: #25a7fd;
   display: flex;
   justify-content: center;
-  padding: 1.5vh 4vh;
+  padding: 1.5vh 10vh;
+  padding: calc(var(--vh, 1vh) * 1.5) calc(var(--vh, 1vh) * 10);
   margin-left: -4vh;
-  width: 140px;
+  margin-left: calc(var(--vh, 1vh) * -4);
+  width: 100%;
+  border: none;
 }
 
 .button .text-wrapper {
