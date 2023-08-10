@@ -13,7 +13,7 @@ export const Home = (): JSX.Element => {
     })
     const navigate = useNavigate(); // navigate 함수 생성
     const handleStartClick = () => {
-        navigate("/numberselect");
+        navigate("/select");
     };
 
     return (

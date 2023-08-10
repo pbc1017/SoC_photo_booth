@@ -14,7 +14,7 @@
   border: 1px none;
   height: 100vh; /* 혹시나 Custom Property 지원 안하는 브라우저를 위한 복귀점(Fallback) */
   height: calc(var(--vh, 1vh) * 100);
-  position: fixed;
+  position: relative;
   width: 400px;
 }
 
@@ -29,8 +29,37 @@
   left: 50% !important;
   transform: translateX(-95%);
   position: relative;
+  white-space: nowrap;
   top: 9vh !important;
   width: 26vh !important;
+}
+
+.number-select .h-1 {
+  color: #000000;
+  font-family: "NanumSquareRound-Bold", Helvetica;
+  font-size: 31px;
+  font-weight: 700;
+  height: 45px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 44px;
+  width: 244px;
+}
+
+.number-select .text-wrapper-2 {
+  color: #000000;
+  font-family: "NanumSquareRound-Bold", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  height: 23px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 102px;
+  white-space: nowrap;
 }
 
 .number-select .text-wrapper-2 {
@@ -46,6 +75,60 @@
   position: relative;
   top: 16vh !important;
   width: 26vh;
+}
+
+.number-select .text-wrapper-2 {
+  color: #000000;
+  font-family: "NanumSquareRound-Bold", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  height: 23px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 102px;
+  white-space: nowrap;
+}
+
+.number-select .bottom-bar {
+  position: relative;
+  justify-content: center;
+  left: 50% !important;
+  top: 98% !important;
+  transform: translateX(-50%) !important;
+  height: 7%;
+  align-items: center;
+  display: inline-flex;
+  gap: 20px;
+  position: absolute;
+  top: 95%;
+}
+
+.number-select .button-instance-prev {
+  background-color: #e4f0ff !important;
+  width: 30%;
+  height: 5vh;
+}
+
+.number-select .button-instance-next {
+  margin-left: unset !important;
+  margin-right: unset !important;
+  width: 30%;
+  height: 5vh;
+}
+
+.number-select .text-wrapper-3 {
+  color: #000000;
+  font-family: "NanumSquareRound-Bold", Helvetica;
+  font-size: 3vh !important;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
 }
 
 .number-select .options {
@@ -91,43 +174,3 @@
   object-fit: contain;
   position: absolute;
 }  
-
-.number-select .bottom-bar {
-  position: relative;
-  justify-content: center;
-  left: 50% !important;
-  top: 98% !important;
-  transform: translateX(-50%) !important;
-  height: 7%;
-  align-items: center;
-  display: inline-flex;
-  gap: 20px;
-  position: absolute;
-  top: 95%;
-}
-
-.number-select .button-instance-prev {
-  background-color: #e4f0ff !important;
-  width: 30%;
-  height: 5vh;
-}
-
-.number-select .button-instance-next {
-  margin-left: unset !important;
-  margin-right: unset !important;
-  width: 30%;
-  height: 5vh;
-}
-
-.number-select .text-wrapper-3 {
-  color: #000000;
-  font-family: "NanumSquareRound-Bold", Helvetica;
-  font-size: 3vh !important;
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: normal;
-  position: relative;
-  text-align: center;
-  white-space: nowrap;
-  width: fit-content;
-}
