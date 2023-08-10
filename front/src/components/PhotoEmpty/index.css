@@ -12,13 +12,12 @@ button {
 }
 
 .PhotoEmpty {
-  width: 200px;
-  height: 200px;
   display: flex;
   flex-direction: column;
   row-gap: 30px;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .container {
@@ -83,7 +82,7 @@ button {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #7b73df;
+  background: #E4F1FF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,23 +95,27 @@ button {
   height: 100%;
 }
 
-.image-upload-button {
+.image-upload-button.center {
+  /* 정중앙 위치 설정 */
   position: absolute;
-  background: #c4c4c4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: none;
-  bottom: 0;
-  right: 4px;
-  width: 60px;
-  height: 60px;
-  font-size: 20px;
+  background: none;
 }
 
-.image-upload-button:hover {
-  background: #d4d4d4;
+.image-upload-button.top-right {
+  /* 오른쪽 위 위치 설정 */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
 }
 
 .image-compress-button {
-  border: 1px solid #c3c3c3;
+  border: none;
   background: #ffffff;
   width: 100px;
   height: 30px;
@@ -189,7 +192,7 @@ button {
 }
 
 .footer .crop {
-  background: #7b73df;
+  background: #25a7fd;
   color: white;
   border: none;
 }

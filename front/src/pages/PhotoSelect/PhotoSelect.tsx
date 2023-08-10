@@ -24,7 +24,7 @@ export const PhotoSelect = (): JSX.Element => {
 
     const navigate = useNavigate(); // navigate 함수 생성
     const handlePrevClick = () => {
-        navigate("/"); // 이전 버튼 클릭시 "/" 라우터로 이동
+        navigate("/numberselect"); // 이전 버튼 클릭시 "/" 라우터로 이동
     };
     const handleNextClick = () => {
       if (selectedOption !== null) {
@@ -43,13 +43,22 @@ export const PhotoSelect = (): JSX.Element => {
     return (
       <div className="number-select">
         <div className="div">
-          <h1 className="h-1">사진 개수 선택</h1>
-          <div className="text-wrapper-2">원하는 사진 개수를 선택해주세요</div>
+          <h1 className="h-1">사진 선택</h1>
+          <div className="text-wrapper-2">원하는 사진을 선택/촬영해주세요</div>
           <div className="bottom-bar">
             <Button className="button-instance-prev" text="이전" onClick={handlePrevClick}/>
-            <div className="text-wrapper-3">1/4</div>
+            <div className="text-wrapper-3">2/4</div>
             <Button className="button-instance-next" text="다음" onClick={handleNextClick}/>
           </div>
+          {options.map((option, index) => (
+              <img
+                  key={index}
+                  className={`option-${index}`}
+                  alt="Option"
+                  src={selectedOption === index ? selectedOptions[index] : option}
+                  onClick={() => handleOptionClick(index)}
+              />
+          ))}
         </div>
       </div>
     );

@@ -26,6 +26,7 @@ export const NumberSelect = (): JSX.Element => {
     const handlePrevClick = () => {
         navigate("/"); // 이전 버튼 클릭시 "/" 라우터로 이동
     };
+
     const handleNextClick = () => {
       if (selectedOption !== null) {
           navigate("/photoselect", { state: { selectedOption } }); // selectedOption을 state로 전달
@@ -43,13 +44,9 @@ export const NumberSelect = (): JSX.Element => {
     return (
       <div className="number-select">
         <div className="div">
-          <h1 className="h-1">사진 개수 선택</h1>
+          <div className="h-1">사진 개수 선택</div>
           <div className="text-wrapper-2">원하는 사진 개수를 선택해주세요</div>
-          <div className="bottom-bar">
-            <Button className="button-instance-prev" text="이전" onClick={handlePrevClick}/>
-            <div className="text-wrapper-3">1/4</div>
-            <Button className="button-instance-next" text="다음" onClick={handleNextClick}/>
-          </div>
+          <div className="options">
           {options.map((option, index) => (
               <img
                   key={index}
@@ -59,6 +56,12 @@ export const NumberSelect = (): JSX.Element => {
                   onClick={() => handleOptionClick(index)}
               />
           ))}
+          </div>
+          <div className="bottom-bar">
+            <Button className="button-instance-prev" text="이전" onClick={handlePrevClick}/>
+            <div className="text-wrapper-3">1/4</div>
+            <Button className="button-instance-next" text="다음" onClick={handleNextClick}/>
+          </div>
         </div>
       </div>
     );

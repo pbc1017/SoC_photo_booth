@@ -224,9 +224,12 @@
 }
 
 .number-select .bottom-bar {
+  justify-content: center;
+  left: 50%; /* 위치를 중앙으로 조정 */
+  transform: translateX(-158px);
   align-items: center;
   display: inline-flex;
-  gap: 19px;
+  gap: 20px;
   position: absolute;
   top: 95%;
 }
