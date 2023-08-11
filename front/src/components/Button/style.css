@@ -5,8 +5,8 @@
   justify-content: center;
   padding: 1.5vh 10vh;
   padding: calc(var(--vh, 1vh) * 1.5) calc(var(--vh, 1vh) * 10);
-  margin-left: -4vh;
-  margin-left: calc(var(--vh, 1vh) * -4);
+  /* margin-left: -4vh;
+  margin-left: calc(var(--vh, 1vh) * -4); */
   width: 100%;
   border: none;
 }

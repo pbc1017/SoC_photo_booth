@@ -13,13 +13,13 @@ export const Home = (): JSX.Element => {
     })
     const navigate = useNavigate(); // navigate 함수 생성
     const handleStartClick = () => {
-        navigate("/numberselect");
+        navigate("/select");
     };
 
     return (
         <div className="home">
             <div className="div">
-                <Button className="button-instance" text="시작하기" onClick={handleStartClick}/>
+                <Button className="button-1" text="시작하기" onClick={handleStartClick}/>
                 <Button className="button-2" text="도움말" />
                 <h1 className="h-1">
                     전산
