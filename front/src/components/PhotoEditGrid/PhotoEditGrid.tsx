@@ -19,7 +19,7 @@ export const PhotoEditGrid: React.FC<PhotoEditGridProps> = ({ setCompressedImage
  
   const photoList = Array.from({ length: numPhoto }, (_, index) => (
     <div key={index}  className={`rectangle-${numPhoto}-${index+1}`}>
-      <PhotoEmpty widthIsBigger={wib} index={index} onCompressImage={handleCompressImage} />
+      <PhotoEmpty className={`rectangle-${index+1}`} widthIsBigger={wib} index={index} onCompressImage={handleCompressImage} />
     </div>
   ));
   //<div className='items'><PhotoEmpty widthIsBigger={true}></PhotoEmpty></div>
