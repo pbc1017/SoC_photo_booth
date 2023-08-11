@@ -9,10 +9,12 @@ import insertButton from "assets/images/insert.png";
 import "./index.css";
 
 interface Props{
+  className: string;
   widthIsBigger: boolean;
+  index: number;
 }
 
-export const PhotoEmpty :React.FC<Props> = ({ widthIsBigger }) => {
+export const PhotoEmpty :React.FC<Props> = ({ widthIsBigger, index, className }) => {
   const [uploadImage, setUploadImage] = useState<string | null>(null);
   const [compressedImage, setCompressedImage] = useState<string | null>(null);
   const { isLoading: isCompressLoading, compressImage } = useImageCompress();
@@ -57,7 +59,7 @@ export const PhotoEmpty :React.FC<Props> = ({ widthIsBigger }) => {
     : { width: "150px", height: "200px" };
   
   return (
-    <div className="PhotoEmpty" style={aspectRatioStyle}>
+    <div className={`PhotoEmpty ${className}`} style={aspectRatioStyle}>
       <div className="givenPhoto">
         {compressedImage ? (
           <img src={compressedImage} />

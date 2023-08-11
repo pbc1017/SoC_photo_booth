@@ -59,7 +59,9 @@ export const Select = (): JSX.Element => {
           />
         );
       } else if (page === 2) {
-        return <SelectPhoto />; // SelectPhoto 컴포넌트 렌더링
+        return <SelectPhoto 
+          SelectOption={selectedOption as number}
+        />; // SelectPhoto 컴포넌트 렌더링
       }
     };
 
