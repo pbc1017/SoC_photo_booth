@@ -8,9 +8,15 @@ import "./index.css";
 
 interface Props{
   widthIsBigger: boolean;
+  index: number;
+  onCompressImage: (index: number, compressedImage: string) => void;
 }
 
-export const PhotoEmpty :React.FC<Props> = ({ widthIsBigger }) => {
+export const PhotoEmpty :React.FC<Props> = ({ 
+  widthIsBigger,
+  index, 
+  onCompressImage
+}) => {
   const [uploadImage, setUploadImage] = useState<string | null>(null);
   const [compressedImage, setCompressedImage] = useState<string | null>(null);
   const { isLoading: isCompressLoading, compressImage } = useImageCompress();
@@ -28,6 +34,7 @@ export const PhotoEmpty :React.FC<Props> = ({ widthIsBigger }) => {
     if (!compressedImage) return;
     const imageUrl = URL.createObjectURL(compressedImage);
     setCompressedImage(imageUrl);
+    onCompressImage(index, imageUrl);
   };
 
   useEffect(() => {

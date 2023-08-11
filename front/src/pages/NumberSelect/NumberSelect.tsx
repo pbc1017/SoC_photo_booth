@@ -28,7 +28,8 @@ export const NumberSelect = (): JSX.Element => {
     };
     const handleNextClick = () => {
       if (selectedOption !== null) {
-          navigate("/photoselect", { state: { selectedOption } }); // selectedOption을 state로 전달
+          const numPhoto = selectedOption < 2 ? selectedOption + 1 : selectedOption * 2;
+          navigate("/photoselect", { state: { numPhoto: numPhoto } }); // selectedOption을 state로 전달
       }
     };
 
