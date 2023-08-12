@@ -25,6 +25,7 @@ export const Select = (): JSX.Element => {
 
     const [page, setPage] = useState<number>(1);
     const [selectedOption, setSelectedOption] = useState<number | null>(null); // 마지막으로 선택된 옵션 저장
+    const [compressedImages, setCompressedImages] = useState<string[]>([]);
 
     const navigate = useNavigate(); // navigate 함수 생성
     
@@ -61,6 +62,7 @@ export const Select = (): JSX.Element => {
       } else if (page === 2) {
         return <SelectPhoto 
           SelectOption={selectedOption as number}
+          setCompressedImages={setCompressedImages}
         />; // SelectPhoto 컴포넌트 렌더링
       }
     };

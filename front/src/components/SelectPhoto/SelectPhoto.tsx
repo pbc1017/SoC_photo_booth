@@ -7,7 +7,7 @@ interface SelectPhotoProps {
   setCompressedImages: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export const SelectPhoto: React.FC<SelectPhotoProps> = ({ SelectOption }) => {
+export const SelectPhoto: React.FC<SelectPhotoProps> = ({ SelectOption,setCompressedImages }) => {
   let photoEmptyClass = '';
   const getPhotoEmptyCount = () => {
     switch (SelectOption) {
