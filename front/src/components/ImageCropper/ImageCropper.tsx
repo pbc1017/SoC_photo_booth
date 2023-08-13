@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import { useRef, useState, useCallback } from "react";
 import { Cropper, ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
@@ -84,7 +85,7 @@ export const ImageCropper = ({ children, aspectRatio, onCrop, hasImage }: PropsT
         onChange={handleFileChange}
       />
       <span onClick={handleChildrenClick}>{children}</span>
-      {image && (
+      {image && ReactDOM.createPortal(
         <div className="container">
           <div className="backdrop" />
           <div className="modal">
@@ -96,8 +97,8 @@ export const ImageCropper = ({ children, aspectRatio, onCrop, hasImage }: PropsT
                   aspectRatio={aspectRatio}
                   src={image}
                   viewMode={1}
-                  width={800}
-                  height={500}
+                  width={400}
+                  height={250}
                   background={false}
                   responsive
                   autoCropArea={1}
@@ -113,7 +114,8 @@ export const ImageCropper = ({ children, aspectRatio, onCrop, hasImage }: PropsT
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body // body에 직접 렌더링
       )}
     </>
   );

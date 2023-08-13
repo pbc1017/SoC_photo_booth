@@ -1,34 +1,26 @@
-.SelectPhoto {
-  width: 27.2%;
-  height: 50%;
+.options .PhotoEmpty-1-0 {
+  position: absolute; 
+  width: 90% !important;
+  height: 90% !important;
+}
+.options .PhotoEmpty-1-0 {
+  left: 5% !important;
+  top: 5% !important;
 }
 
-.SelectPhoto > div.PhotoEmpty {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.options .PhotoEmpty-2-0,
+.options .PhotoEmpty-2-1 {
+  position: absolute; 
+  width: 90% !important;
+  height: 45% !important;
 }
 
-/* 1개일 때 */
-.one-photo > div.PhotoEmpty {
-  width: 100%;
-  height: 100%;
+.options .PhotoEmpty-2-0 {
+  left: 5% !important;
+  top: 2.5% !important;
 }
 
-/* 2개일 때 */
-.two-photos > div.PhotoEmpty {
-  width: 100%;
-  height: 50%;
-}
-
-/* 4개일 때 */
-.four-photos > div.PhotoEmpty {
-  width: 50%;
-  height: 50%;
-}
-
-/* 6개일 때 */
-.six-photos > div.PhotoEmpty {
-  width: 50%;
-  height: 33.33%;
+.options .PhotoEmpty-2-1 {
+  left: 5% !important;
+  top: 52.5% !important;
 }

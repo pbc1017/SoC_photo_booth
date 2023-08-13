@@ -76,7 +76,7 @@ export const Select = (): JSX.Element => {
     const h1s = ["사진 개수 선택","사진 선택","프레임 선택","필터 선택"];
     const h2s = ["원하는 사진 개수를 선택해주세요","원하는 사진을 선택/촬영해주세요","원하는 프레임을 선택해주세요","원하는 필터를 선택해주세요"]
     return (
-      <div className="number-select">
+      <div className="select">
         <div className="div">
           <div className="h-1">{h1s[page-1]}</div>
           <div className="text-wrapper-2">{h2s[page-1]}</div>

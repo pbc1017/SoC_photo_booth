@@ -12,16 +12,16 @@ export const SelectPhoto: React.FC<SelectPhotoProps> = ({ SelectOption,setCompre
   const getPhotoEmptyCount = () => {
     switch (SelectOption) {
       case 0:
-        photoEmptyClass = 'one-photo';
+        photoEmptyClass = '1';
         return 1;
       case 1:
-        photoEmptyClass = 'two-photos';
+        photoEmptyClass = '2';
         return 2;
       case 2:
-        photoEmptyClass = 'four-photos';
+        photoEmptyClass = '4';
         return 4;
       case 3:
-        photoEmptyClass = 'six-photos';
+        photoEmptyClass = '6';
         return 6;
       default:
         return 0;
@@ -39,7 +39,6 @@ export const SelectPhoto: React.FC<SelectPhotoProps> = ({ SelectOption,setCompre
   };
   return (
     <div className="options">
-      <div className={`SelectPhoto ${photoEmptyClass}`}>
       {Array.from({ length: photoEmptyCount }).map((_, index) => (
         <PhotoEmpty
         key={index}
@@ -49,7 +48,6 @@ export const SelectPhoto: React.FC<SelectPhotoProps> = ({ SelectOption,setCompre
         onCompressImage={handleCompressImage}
       />
       ))}
-      </div>
     </div>
   );
 };

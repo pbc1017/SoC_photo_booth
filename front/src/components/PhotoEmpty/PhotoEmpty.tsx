@@ -69,7 +69,7 @@ export const PhotoEmpty :React.FC<Props> = ({
     : { width: "150px", height: "200px" };
   
   return (
-    <div className={`PhotoEmpty ${className}`} style={aspectRatioStyle}>
+    <div className={`PhotoEmpty-${className}-${index}`} style={aspectRatioStyle}>
       <div className="givenPhoto">
         {compressedImage ? (
           <img src={compressedImage} />
