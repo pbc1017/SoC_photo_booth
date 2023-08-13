@@ -46,7 +46,8 @@
   font-weight: 300;
   height: 10vh;
   height: calc(var(--vh, 1vh) * 10);
-  left: 101px;
+  left: 50%;
+  transform: translateX(-53%);
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
@@ -57,7 +58,8 @@
 
 .home .element {
   height: 30%;
-  left: 104px;
+  left: 50%;
+  transform: translateX(-53%);
   object-fit: contain;
   position: absolute;
   top: 40%;

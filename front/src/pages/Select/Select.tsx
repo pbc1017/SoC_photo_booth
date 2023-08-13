@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Button } from "components/Button";
 import { useNavigate } from "react-router-dom";
 import { SelectNumber } from "components/SelectNumber";
-import { SelectPhoto } from "components/SelectPhoto"; // 가정: SelectPhoto가 이 경로에 존재함
+import { SelectPhoto } from "components/SelectPhoto";
+import { SelectFrame } from "components/SelectFrame";
+import html2canvas from "html2canvas";
+import saveAs from "file-saver";
+import { useRef } from "react";
 
 import option1 from "assets/images/option1.png";
 import option2 from "assets/images/option2.png";
@@ -14,6 +18,7 @@ import option3_1 from "assets/images/option3-1.png";
 import option4_1 from "assets/images/option4-1.png";
 
 import "./style.css";
+import { SelectFilter } from "components/SelectFilter";
 
 export const Select = (): JSX.Element => {
     let vh = window.innerHeight * 0.01
@@ -26,9 +31,28 @@ export const Select = (): JSX.Element => {
     const [page, setPage] = useState<number>(1);
     const [selectedOption, setSelectedOption] = useState<number | null>(null); // 마지막으로 선택된 옵션 저장
     const [compressedImages, setCompressedImages] = useState<string[]>([]);
+    const [selectedFrameOption, setSelectedFrameOption] = useState(0); // 상태를 저장하는 Hook
 
     const navigate = useNavigate(); // navigate 함수 생성
     
+    const divRef = useRef<HTMLDivElement>(null);
+
+    const handleDownload = async () => {
+      if (!divRef.current) return;
+
+      try {
+        const div = divRef.current;
+        const canvas = await html2canvas(div, { scale: 2 });
+        canvas.toBlob((blob) => {
+          if (blob !== null) {
+            saveAs(blob, "result.png");
+          }
+        });
+      } catch (error) {
+        console.error("Error converting div to image:", error);
+      }
+    };
+
     // 이전 버튼 클릭 핸들러
     const handlePrevClick = () => {
       if (page === 1) {
@@ -41,7 +65,8 @@ export const Select = (): JSX.Element => {
     // 다음 버튼 클릭 핸들러
     const handleNextClick = () => {
       if (page === 4) {
-        navigate("/loading");
+        handleDownload();
+        // navigate("/loading");
       } else if (page === 1 && selectedOption !== null) {
         setPage(page + 1);
       } else if (page > 1) {
@@ -64,6 +89,20 @@ export const Select = (): JSX.Element => {
           SelectOption={selectedOption as number}
           setCompressedImages={setCompressedImages}
         />; // SelectPhoto 컴포넌트 렌더링
+      } else if (page == 3) {
+        return <SelectFrame
+          photoOption={selectedOption as number}
+          compressedImages={compressedImages}
+          selectedFrameOption={selectedFrameOption}
+          setSelectedFrameOption={setSelectedFrameOption}
+        />
+      } else if (page == 4) {
+        return <SelectFilter
+          photoOption={selectedOption as number}
+          compressedImages={compressedImages}
+          selectedFrameOption={selectedFrameOption}
+          divRef={divRef}
+        />
       }
     };
 

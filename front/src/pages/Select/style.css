@@ -88,19 +88,18 @@
   display: inline-flex;
   gap: 20px;
   position: absolute;
-  top: 95%;
 }
 
 .select .button-instance-prev {
   background-color: #e4f0ff !important;
-  width: 30%;
+  width: 20%;
   height: 5vh;
 }
 
 .select .button-instance-next {
   margin-left: unset !important;
   margin-right: unset !important;
-  width: 30%;
+  width: 20%;
   height: 5vh;
 }
 
@@ -127,39 +126,3 @@
   background: #f0f0f0; /* 배경색 추가, 필요에 따라 변경 */
   overflow: hidden; /* 내부 내용이 넘치지 않게 함 */
 }
-
-/* 
-.select .option-0 {
-  position: absolute;
-  top: 0% !important;
-  left: 2% !important;
-  width: 24% !important;
-  height: 48% !important;
-  object-fit: contain;
-  position: absolute;
-}
-.select .option-1 {
-  top: 0% !important;
-  left: 14% !important;
-  width: 12% !important;
-  height: 24% !important;
-  object-fit: contain;
-  position: absolute;
-}
-.select .option-2 {
-  position: absolute;
-  top: 26% !important;
-  left: 1% !important;
-  width: 12% !important;
-  height: 24% !important;
-  object-fit: contain;
-  position: absolute;
-}
-.select .option-3 {
-  top: 26% !important;
-  left: 14% !important;
-  width: 12% !important;
-  height: 24% !important;
-  object-fit: contain;
-  position: absolute;
-}    */
