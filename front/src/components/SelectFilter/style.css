@@ -1,3 +1,15 @@
+.brighten {
+  filter : brightness(1.3);
+  -o-filter : brightness(1.3);
+  -webkit-filter : brightness(1.3);
+}
+
+.grayscale {
+  filter : grayscale(100%);
+  -o-filter : grayscale(100%);
+  -webkit-filter : grayscale(100%);
+}
+
 /* .options .PhotoEmpty-1-0 {
   position: absolute; 
   width: 90% !important;

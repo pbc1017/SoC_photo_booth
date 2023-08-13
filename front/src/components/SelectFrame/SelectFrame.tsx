@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
 import { PhotoEmpty } from 'components/PhotoEmpty';
+import frame1 from "assets/images/frame_image_1.jpeg";
+import frame2 from "assets/images/frame_image_2.jpg";
+import frame3 from "assets/images/frame_image_3.jpeg";
+import frame4 from "assets/images/frame_image_4.jpeg";
 import "./style.css"
 
 interface SelectFrameProps {
@@ -30,11 +34,7 @@ export const SelectFrame: React.FC<SelectFrameProps> = ({ photoOption,compressed
     <img key={index}  className={`PhotoEmpty-${numPhoto}-${index}`} src={compressedImages[index]}/>
   ));
 
-  const frameArray = [
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg",
-    "https://i.namu.wiki/i/nZ-acc7hcoYljIzwubPljI1eh88XAdU9k23Ep9X0yZdNeW01KWqrkgKM81qrZ5caBaaWNGpJgAyI-OSue8JqAQ.webp",
-    "https://i.namu.wiki/i/kUK4aBN3nm1tpjk_8kWwrswOn25jaIJhu3rvsCTey7PVEa062IJi7NhlOI20eUOzeudcGqQzHCtmXbgfxK86bw.webp",
-    "https://blog.kakaocdn.net/dn/rsYqr/btrgazUk5x7/w4Tq7vShA7qY66gM2Pl1aK/img.jpg"]
+  const frameArray = [frame1,frame2,frame3,frame4]
 
   return (
     <div className="options">

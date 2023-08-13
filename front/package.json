@@ -10,6 +10,7 @@
     "@types/node": "^16.18.39",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
+    "aws-sdk": "^2.1435.0",
     "browser-image-compression": "^2.0.2",
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",

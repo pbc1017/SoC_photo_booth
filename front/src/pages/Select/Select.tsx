@@ -7,6 +7,8 @@ import { SelectFrame } from "components/SelectFrame";
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import { useRef } from "react";
+import * as AWS from 'aws-sdk';
+import { S3 } from 'aws-sdk';
 
 import option1 from "assets/images/option1.png";
 import option2 from "assets/images/option2.png";
@@ -19,6 +21,13 @@ import option4_1 from "assets/images/option4-1.png";
 
 import "./style.css";
 import { SelectFilter } from "components/SelectFilter";
+
+AWS.config.update({
+  region: 'ap-northeast-2', 
+  credentials: new AWS.Credentials('AKIA2ZMSTBKSABGLE55S', 'kKwA1kt7HQb97YVTBYchqFw0SD21WFd/H5V0eK5u'), 
+});
+
+const s3 = new AWS.S3();
 
 export const Select = (): JSX.Element => {
     let vh = window.innerHeight * 0.01
@@ -36,7 +45,7 @@ export const Select = (): JSX.Element => {
     const navigate = useNavigate(); // navigate 함수 생성
     
     const divRef = useRef<HTMLDivElement>(null);
-
+    let imageBlob: Blob | null = null;
     const handleDownload = async () => {
       if (!divRef.current) return;
 
@@ -45,11 +54,30 @@ export const Select = (): JSX.Element => {
         const canvas = await html2canvas(div, { scale: 2 });
         canvas.toBlob((blob) => {
           if (blob !== null) {
+            console.log(blob)
+            imageBlob = blob;
             saveAs(blob, "result.png");
           }
-        });
+        }, 'image/jpeg', 0.8);
       } catch (error) {
         console.error("Error converting div to image:", error);
+      }
+    };
+
+    const uploadBlobToS3 = async (blob: Blob, fileName: string) => {
+      const params: AWS.S3.PutObjectRequest = {
+        Bucket: 'socframe',
+        Key: fileName,
+        Body: blob,
+        ContentType: 'image/jpeg', 
+        ACL: 'public-read',
+      };
+  
+      try {
+        const response = await s3.upload(params).promise();
+        console.log('Uploaded to S3:', response);
+      } catch (error) {
+        console.error('Error uploading to S3:', error);
       }
     };
 
@@ -66,6 +94,7 @@ export const Select = (): JSX.Element => {
     const handleNextClick = () => {
       if (page === 4) {
         handleDownload();
+        uploadBlobToS3(imageBlob!, 'test.jpeg');
         // navigate("/loading");
       } else if (page === 1 && selectedOption !== null) {
         setPage(page + 1);
