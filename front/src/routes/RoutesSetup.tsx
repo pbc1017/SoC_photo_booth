@@ -5,6 +5,8 @@ import { PhotoSelect } from 'pages/PhotoSelect'
 import { FrameSelect } from 'pages/FrameSelect'
 import { FilterSelect } from 'pages/FilterSelect'
 import { FileDownloadPage } from 'pages/FileDownloadPage'
+import { Loading } from 'pages/Loading'
+import { Result } from 'pages/Result'
 
 import { Select } from 'pages/Select'
 
@@ -24,7 +26,8 @@ export default function RouteSetup() {
             <Route path= "/filedownload" element = {<FileDownloadPage/>}/>
 
             <Route path= "/select" element = {<Select/>}/>
-
+            <Route path= "/loading" element = {<Loading/>}/>
+            <Route path= "/result" element = {<Result/>}/>
         </Routes>
     )
 }

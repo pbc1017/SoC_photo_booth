@@ -126,3 +126,22 @@
   background: #f0f0f0; /* 배경색 추가, 필요에 따라 변경 */
   overflow: hidden; /* 내부 내용이 넘치지 않게 함 */
 }
+
+/* .select .finalPhoto {
+  width: 600px;
+  height: 900px;
+}
+
+.select .fianlPhoto-2-0,
+.select .fianlPhoto-2-1 {
+  width: 90%;
+  height: 45%;
+}
+.select .finalPhoto-2-0 {
+  left: 5%;
+  top: 2.5%;
+}
+.select .finalPhoto-2-1 {
+  left: 5%;
+  top: 52.5%;
+} */

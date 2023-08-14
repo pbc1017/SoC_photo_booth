@@ -5,29 +5,10 @@ import { SelectNumber } from "components/SelectNumber";
 import { SelectPhoto } from "components/SelectPhoto";
 import { SelectFrame } from "components/SelectFrame";
 import html2canvas from "html2canvas";
-import saveAs from "file-saver";
 import { useRef } from "react";
-import * as AWS from 'aws-sdk';
-import { S3 } from 'aws-sdk';
-
-import option1 from "assets/images/option1.png";
-import option2 from "assets/images/option2.png";
-import option3 from "assets/images/option3.png";
-import option4 from "assets/images/option4.png";
-import option1_1 from "assets/images/option1-1.png";
-import option2_1 from "assets/images/option2-1.png";
-import option3_1 from "assets/images/option3-1.png";
-import option4_1 from "assets/images/option4-1.png";
 
 import "./style.css";
 import { SelectFilter } from "components/SelectFilter";
-
-AWS.config.update({
-  region: 'ap-northeast-2', 
-  credentials: new AWS.Credentials('AKIA2ZMSTBKSABGLE55S', 'kKwA1kt7HQb97YVTBYchqFw0SD21WFd/H5V0eK5u'), 
-});
-
-const s3 = new AWS.S3();
 
 export const Select = (): JSX.Element => {
     let vh = window.innerHeight * 0.01
@@ -99,7 +80,12 @@ export const Select = (): JSX.Element => {
     
     const getFilterOption = (filter: string): number => {
       // 필터 문자열을 기반으로 필요한 옵션을 반환
-      if (filter.includes('brightness')) return 1;
+      if (filter.includes('brightness')) {
+        if (filter.includes('grayscale')) {
+          return 3;
+        }
+        return 1;
+      }
       if (filter.includes('grayscale')) return 2;
       // 추가 필터 옵션은 여기에 맞게 구현
       return 0; // 기본값
@@ -129,8 +115,11 @@ export const Select = (): JSX.Element => {
               if (blob !== null) {
                 imageBlob = blob;
                 console.log(imageBlob);
-                saveAs(blob, 'result.jpeg');
-                uploadBlobToS3(imageBlob!, 'test.jpeg');
+                // saveAs(blob, 'result.jpeg');
+                // uploadBlobToS3(imageBlob!, 'test.jpeg');
+
+                const imageUrl = URL.createObjectURL(blob); // Blob을 URL로 변환
+                navigate('/loading', { state: { imageSrc: imageUrl } }); // URL을 다음 경로로 전달
               }
             },
             'image/jpeg',
@@ -146,22 +135,6 @@ export const Select = (): JSX.Element => {
         }, 10);
       } catch (error) {
         console.error('Error converting div to image:', error);
-      }
-    };
-
-    const uploadBlobToS3 = async (blob: Blob, fileName: string) => {
-      const params: AWS.S3.PutObjectRequest = {
-        Bucket: 'socframe',
-        Key: fileName,
-        Body: blob,
-        ContentType: 'image/jpeg', 
-      };
-  
-      try {
-        const response = await s3.upload(params).promise();
-        console.log('Uploaded to S3:', response);
-      } catch (error) {
-        console.error('Error uploading to S3:', error);
       }
     };
 
@@ -190,8 +163,6 @@ export const Select = (): JSX.Element => {
       if (page === 1) {
         return (
           <SelectNumber
-            options={optionImg}
-            selectedOptions={selectedOptionImg}
             selectedOption={selectedOption}
             handleOptionClick={handleOptionClick}
           />
@@ -222,8 +193,29 @@ export const Select = (): JSX.Element => {
         setSelectedOption(optionIndex);
     };
 
-    const optionImg = [option1, option2, option3, option4];
-    const selectedOptionImg = [option1_1, option2_1, option3_1, option4_1];
+    // const getPhotoEmptyCount = () => {
+    //   switch (selectedOption) {
+    //     case 0:
+    //       return 1;
+    //     case 1:
+    //       return 2;
+    //     case 2:
+    //       return 4;
+    //     case 3:
+    //       return 6;
+    //     default:
+    //       return 0;
+    //   }
+    // };
+    // const numPhoto = getPhotoEmptyCount();
+    // const photoList = Array.from({ length: numPhoto }, (_, index) => (
+    //   <img
+    //     key={index}
+    //     className={`fianlPhoto-${numPhoto}-${index}`}
+    //     src={compressedImages[index]}
+    //   />
+    // ));
+
     const h1s = ["사진 개수 선택","사진 선택","프레임 선택","필터 선택"];
     const h2s = ["원하는 사진 개수를 선택해주세요","원하는 사진을 선택/촬영해주세요","원하는 프레임을 선택해주세요","원하는 필터를 선택해주세요"]
     return (
@@ -238,6 +230,9 @@ export const Select = (): JSX.Element => {
             <Button className="button-instance-next" text="다음" onClick={handleNextClick}/>
           </div>
         </div>
+        {/* <div className='finalPhoto' ref={divRef} style={{ display: 'none' }}>
+          {photoList}
+        </div> */}
       </div>
     );
 };
