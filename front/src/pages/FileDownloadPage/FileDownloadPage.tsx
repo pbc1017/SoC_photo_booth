@@ -12,11 +12,10 @@ import { S3 } from 'aws-sdk';
 
 
 // AWS 설정
-const awsConfig = {
+AWS.config.update({
   region: 'ap-northeast-2', 
   credentials: new AWS.Credentials('AKIA2ZMSTBKSABGLE55S', 'kKwA1kt7HQb97YVTBYchqFw0SD21WFd/H5V0eK5u'), 
-};
-
+});
 const s3 = new AWS.S3();
 
 export const FileDownloadPage = (): JSX.Element => {
@@ -72,7 +71,6 @@ export const FileDownloadPage = (): JSX.Element => {
     }
   };
 
-  
 
   const uploadBlobToS3 = async (blob: Blob, fileName: string) => {
     const params: AWS.S3.PutObjectRequest = {

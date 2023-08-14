@@ -1,5 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { PhotoEmpty } from 'components/PhotoEmpty';
+import frame1 from "assets/images/frame_image_1.jpeg";
+import frame2 from "assets/images/frame_image_2.jpg";
+import frame3 from "assets/images/frame_image_3.jpeg";
+import frame4 from "assets/images/frame_image_4.jpeg";
 import "./style.css"
 
 interface SelectFilterProps {
@@ -27,15 +31,49 @@ export const SelectFilter: React.FC<SelectFilterProps> = ({ photoOption,compress
   
   const [selectedFilterOption, setSelectedFilterOption] = useState(0); // 상태를 저장하는 Hook
   const numPhoto = getPhotoEmptyCount();
+
+  const [imageFilter, setImageFilter] = useState('');
+
+  useEffect(() => {
+    // 일시적으로 filter를 비워주는 작업
+    setImageFilter('');
+
+    // 필요한 필터를 적용하는 작업 (200ms 후에 실행)
+    const timer = setTimeout(() => {
+      switch (selectedFilterOption) {
+        case 0:
+          setImageFilter(''); // 아무런 변경을 하지 않음
+          break;
+        case 1:
+          setImageFilter('brightness(1.2)'); // 사진을 조금 더 밝게 만듦
+          break;
+        case 2:
+          setImageFilter('grayscale(1)'); // 사진을 흑백으로 바꿈
+          break;
+        case 3:
+          setImageFilter(''); // 홀수 인덱스 사진만 흑백으로 만드는 로직은 별도로 처리
+          break;
+        default:
+          setImageFilter('');
+          break;
+      }
+    }, 10);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [selectedFilterOption]);
+
   const photoList = Array.from({ length: numPhoto }, (_, index) => (
-    <img key={index}  className={`PhotoEmpty-${numPhoto}-${index}`} src={compressedImages[index]}/>
+    <img
+      key={index}
+      className={`PhotoEmpty-${numPhoto}-${index}`}
+      src={compressedImages[index]}
+      style={{ filter: (selectedFilterOption == 3 && index % 2 == 1) ? 'grayscale(1)' : imageFilter }}
+    />
   ));
 
-  const frameArray = [
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg",
-    "https://i.namu.wiki/i/nZ-acc7hcoYljIzwubPljI1eh88XAdU9k23Ep9X0yZdNeW01KWqrkgKM81qrZ5caBaaWNGpJgAyI-OSue8JqAQ.webp",
-    "https://i.namu.wiki/i/kUK4aBN3nm1tpjk_8kWwrswOn25jaIJhu3rvsCTey7PVEa062IJi7NhlOI20eUOzeudcGqQzHCtmXbgfxK86bw.webp",
-    "https://blog.kakaocdn.net/dn/rsYqr/btrgazUk5x7/w4Tq7vShA7qY66gM2Pl1aK/img.jpg"]
+  const frameArray = [frame1,frame2,frame3,frame4]
 
   return (
     <div className="options">
