@@ -109,7 +109,10 @@ export const Select = (): JSX.Element => {
   
         // 모든 이미지의 소스가 변환된 후 10ms 지연
         setTimeout(async () => {
-          const canvas = await html2canvas(div, { scale: 2 });
+          const canvas = await html2canvas(div, {
+            scale: 2,
+            backgroundColor: null // 배경색을 투명하게 설정
+          });
           canvas.toBlob(
             (blob) => {
               if (blob !== null) {
