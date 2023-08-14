@@ -41,15 +41,18 @@ export const Loading = (): JSX.Element => {
     }
   };
 
-  const handlePrintClick = () => {
-    // 서버로 이미지 src 전송
-    // axios.post("/api/print", { imageSrc })
-    //   .then(() => {
-    //     // 성공 시 처리
-    //   })
-    //   .catch((error) => {
-    //     console.error("Print error:", error);
-    //   });
+  const handlePrintClick = async () => {
+    // 이미지를 Blob으로 가져옴
+    const response = await fetch(imageSrc);
+    const blob = await response.blob();
+  
+    // 파일 이름 설정 (원하는 이름으로 변경 가능)
+    const fileName = studentNumber.toString() + '_' + name + '.jpg';
+  
+    // Blob을 S3로 전송
+    await uploadBlobToS3(blob, fileName);
+  
+    // "/result" 경로로 이동하면서 imageSrc 전달
     navigate("/result", { state: { imageSrc } });
   };
 
