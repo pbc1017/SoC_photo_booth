@@ -127,12 +127,16 @@ export const Select = (): JSX.Element => {
           canvas.toBlob(
             (blob) => {
               if (blob !== null) {
-                saveAs(blob, 'result.png');
+                imageBlob = blob;
+                console.log(imageBlob);
+                saveAs(blob, 'result.jpeg');
+                uploadBlobToS3(imageBlob!, 'test.jpeg');
               }
             },
             'image/jpeg',
             0.8
           );
+
   
           // 이미지를 원래 상태로 되돌림
           images.forEach((image, index) => {
@@ -151,7 +155,6 @@ export const Select = (): JSX.Element => {
         Key: fileName,
         Body: blob,
         ContentType: 'image/jpeg', 
-        ACL: 'public-read',
       };
   
       try {
@@ -175,7 +178,6 @@ export const Select = (): JSX.Element => {
     const handleNextClick = () => {
       if (page === 4) {
         handleDownload();
-        uploadBlobToS3(imageBlob!, 'test.jpeg');
         // navigate("/loading");
       } else if (page === 1 && selectedOption !== null) {
         setPage(page + 1);
