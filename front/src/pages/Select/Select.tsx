@@ -46,21 +46,55 @@ export const Select = (): JSX.Element => {
     
     const divRef = useRef<HTMLDivElement>(null);
     let imageBlob: Blob | null = null;
+    
+    const applyFilter = (img: HTMLImageElement, filter: string) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        ctx.filter = filter;
+        ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+      }
+      return canvas.toDataURL();
+    };
+  
     const handleDownload = async () => {
       if (!divRef.current) return;
-
+  
       try {
         const div = divRef.current;
-        const canvas = await html2canvas(div, { scale: 2 });
-        canvas.toBlob((blob) => {
-          if (blob !== null) {
-            console.log(blob)
-            imageBlob = blob;
-            saveAs(blob, "result.png");
-          }
-        }, 'image/jpeg', 0.8);
+        const images = div.querySelectorAll('img');
+        const originalSrc: string[] = [];
+  
+        images.forEach((image, index) => {
+          const img = image as HTMLImageElement;
+          originalSrc[index] = img.src; // 원래 src를 저장
+          const filter = getComputedStyle(img).filter;
+          img.src = applyFilter(img, filter);
+        });
+  
+        // 모든 이미지의 소스가 변환된 후 10ms 지연
+        setTimeout(async () => {
+          const canvas = await html2canvas(div, { scale: 2 });
+          canvas.toBlob(
+            (blob) => {
+              if (blob !== null) {
+                saveAs(blob, 'result.png');
+              }
+            },
+            'image/jpeg',
+            0.8
+          );
+  
+          // 이미지를 원래 상태로 되돌림
+          images.forEach((image, index) => {
+            const img = image as HTMLImageElement;
+            img.src = originalSrc[index];
+          });
+        }, 10);
       } catch (error) {
-        console.error("Error converting div to image:", error);
+        console.error('Error converting div to image:', error);
       }
     };
 
