@@ -8,7 +8,6 @@ import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import { useRef, useEffect } from "react";
 import * as AWS from 'aws-sdk';
-import { S3 } from 'aws-sdk';
 
 
 // AWS 설정
