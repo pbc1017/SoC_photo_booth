@@ -47,18 +47,64 @@ export const Select = (): JSX.Element => {
     const divRef = useRef<HTMLDivElement>(null);
     let imageBlob: Blob | null = null;
     
-    const applyFilter = (img: HTMLImageElement, filter: string) => {
+    const applyFilter = (img: HTMLImageElement, filterOption: number): string => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       if (ctx) {
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
-        ctx.filter = filter;
         ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+    
+        // 픽셀 데이터 가져오기
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const pixels = imageData.data;
+    
+        // 필터 옵션에 따른 처리
+        switch (filterOption) {
+          case 1: // 밝게
+            for (let i = 0; i < pixels.length; i += 4) {
+              pixels[i] += 50; // R
+              pixels[i + 1] += 50; // G
+              pixels[i + 2] += 50; // B
+            }
+            break;
+          case 2: // 흑백
+            for (let i = 0; i < pixels.length; i += 4) {
+              const grayscale = pixels[i] * 0.3 + pixels[i + 1] * 0.59 + pixels[i + 2] * 0.11;
+              pixels[i] = grayscale; // R
+              pixels[i + 1] = grayscale; // G
+              pixels[i + 2] = grayscale; // B
+            }
+            break;
+          case 3: // 홀수 인덱스 흑백
+            for (let y = 0; y < canvas.height; y++) {
+              for (let x = 0; x < canvas.width; x++) {
+                const index = (y * canvas.width + x) * 4;
+                if (index % 2 === 0) continue;
+                const grayscale = pixels[index] * 0.3 + pixels[index + 1] * 0.59 + pixels[index + 2] * 0.11;
+                pixels[index] = grayscale; // R
+                pixels[index + 1] = grayscale; // G
+                pixels[index + 2] = grayscale; // B
+              }
+            }
+            break;
+          default:
+            break;
+        }
+    
+        ctx.putImageData(imageData, 0, 0);
       }
       return canvas.toDataURL();
     };
-  
+    
+    const getFilterOption = (filter: string): number => {
+      // 필터 문자열을 기반으로 필요한 옵션을 반환
+      if (filter.includes('brightness')) return 1;
+      if (filter.includes('grayscale')) return 2;
+      // 추가 필터 옵션은 여기에 맞게 구현
+      return 0; // 기본값
+    };
+
     const handleDownload = async () => {
       if (!divRef.current) return;
   
@@ -71,7 +117,8 @@ export const Select = (): JSX.Element => {
           const img = image as HTMLImageElement;
           originalSrc[index] = img.src; // 원래 src를 저장
           const filter = getComputedStyle(img).filter;
-          img.src = applyFilter(img, filter);
+          const filterOption = getFilterOption(filter); // 필터 옵션을 숫자로 변환
+          img.src = applyFilter(img, filterOption);
         });
   
         // 모든 이미지의 소스가 변환된 후 10ms 지연
