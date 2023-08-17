@@ -18,7 +18,10 @@ app.use(express.urlencoded({ extended: false }));
 mongoose.connect('mongodb://localhost:27017/mydb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+  serverSelectionTimeoutMS: 5000, // 옵션 추가
+})
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Failed to connect to MongoDB:", err));
 
 // Create schema for request model
 const requestSchema = new mongoose.Schema({
