@@ -6,11 +6,25 @@ import { SelectPhoto } from "components/SelectPhoto";
 import { SelectFrame } from "components/SelectFrame";
 import html2canvas from "html2canvas";
 import { useRef } from "react";
+import  {WarningModal}  from 'components/WarningModal';
 
 import "./style.css";
 import { SelectFilter } from "components/SelectFilter";
 
 export const Select = (): JSX.Element => {
+    // modal 설정
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [warningMessage, setWarningMessage] = useState<string>("");
+
+    const handleAlert = (message: string): void => {
+      setWarningMessage(message);
+      setIsModalOpen(true);
+    };
+
+    const closeModal = (): void => {
+      setIsModalOpen(false);
+    };
+
     let vh = window.innerHeight * 0.01
     document.documentElement.style.setProperty('--vh', `${vh}px`)
     window.addEventListener('resize', () => {
@@ -157,6 +171,15 @@ export const Select = (): JSX.Element => {
         // navigate("/loading");
       } else if (page === 1 && selectedOption !== null) {
         setPage(page + 1);
+      } else if(page === 2){
+        console.log(compressedImages.length);
+        console.log((selectedOption as number) + 1);
+        if(compressedImages.length === (selectedOption as number) + 1 && compressedImages[0] !== undefined){
+          setPage(page + 1);
+        }
+        else{
+          handleAlert("사진을 모두 선택해주세요.");
+        }
       } else if (page > 1) {
         setPage(page + 1);
       }
@@ -228,14 +251,21 @@ export const Select = (): JSX.Element => {
           <div className="text-wrapper-2">{h2s[page-1]}</div>
           {renderComponent()}
           <div className="bottom-bar">
+          
             <Button className="button-instance-prev" text="이전" onClick={handlePrevClick}/>
             <div className="text-wrapper-3">{page}/4</div>
             <Button className="button-instance-next" text="다음" onClick={handleNextClick}/>
+            
           </div>
         </div>
         {/* <div className='finalPhoto' ref={divRef} style={{ display: 'none' }}>
           {photoList}
         </div> */}
+        <WarningModal
+              isOpen={isModalOpen}
+              onRequestClose={(closeModal)}
+              message={warningMessage}
+            />
       </div>
     );
 };
