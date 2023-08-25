@@ -36,9 +36,6 @@ export const Loading = (): JSX.Element => {
     navigate("/result", {state: {imageSrc}});
   };
   
-  useEffect(() => {
-    handleAlert("인쇄 할 거면 인쇄 누르고 안할거면 건너뛰기 누르세요\n 인쇄 하려면 학번 이름 필수");  // 수정하자
-  }, []);
 
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -69,10 +66,10 @@ export const Loading = (): JSX.Element => {
   };
 
   const handlePrintClick = async () => {
-    // if (studentNumber.value === "" || name.value === "") {
-    //   handleAlert("학번 이름 필수");  // 수정하자
-    //   return;
-    // }
+    if (studentNumber.value === "" || name.value === "") {
+    handleAlert("학번 이름 필수");  // 수정하자
+    return;
+    }
     // 이미지를 Blob으로 가져옴
     const response = await fetch(imageSrc);
     const blob = await response.blob();
@@ -81,7 +78,7 @@ export const Loading = (): JSX.Element => {
     const fileName = studentNumber.toString() + '_' + name + '.jpg';
   
     // Blob을 S3로 전송
-    //await uploadBlobToS3(blob, fileName);
+    await uploadBlobToS3(blob, fileName);
     await asyncAlert("인쇄 완료");
     navigate("/result", {state: {imageSrc}});
   };
