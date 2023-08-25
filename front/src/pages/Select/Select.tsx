@@ -217,6 +217,7 @@ export const Select = (): JSX.Element => {
 
     const handleOptionClick = (optionIndex: number) => {
         setSelectedOption(optionIndex);
+        setCompressedImages([]);
     };
 
     // const getPhotoEmptyCount = () => {
