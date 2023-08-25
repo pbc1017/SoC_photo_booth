@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
-mongoose.connect('mongodb://localhost:27017/mydb', {
+mongoose.connect('mongodb+srv://user:1234@cluster0.z1goqxn.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000, // 옵션 추가
@@ -71,10 +71,11 @@ async function addRequest(requestType) {
   const currentCount = await getCurrentCount(requestType);
   currentCount.count += 1;
   await currentCount.save();
-
+  const currentDate = new Date();
+  currentDate.setHours(currentDate.getHours() + 9); // UTC 기준에서 9시간 추가 (한국은 UTC+9)
   const newRequest = new Request({
     requestType,
-    requestTime: new Date(),
+    requestTime: currentDate,
   });
 
   await newRequest.save();
