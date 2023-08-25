@@ -9,7 +9,7 @@ import { NotifyModal } from "components/NotifyModal";
 
 AWS.config.update({
     region: 'ap-northeast-2', 
-    credentials: new AWS.Credentials('AKIA2ZMSTBKSABGLE55S', 'kKwA1kt7HQb97YVTBYchqFw0SD21WFd/H5V0eK5u'), 
+    credentials: new AWS.Credentials('AKIASXX4F2YI6VYLYLNU', 'c9Cgx+LALeBxJLZc340jjC0AWiClZ/kbgrgBctZO'), 
 });
 
 const s3 = new AWS.S3();
@@ -51,7 +51,7 @@ export const Loading = (): JSX.Element => {
 
   const uploadBlobToS3 = async (blob: Blob, fileName: string) => {
     const params: AWS.S3.PutObjectRequest = {
-      Bucket: 'socframe',
+      Bucket: 'soc-photo',
       Key: fileName,
       Body: blob,
       ContentType: 'image/jpeg', 
@@ -59,9 +59,11 @@ export const Loading = (): JSX.Element => {
 
     try {
       const response = await s3.upload(params).promise();
+      handleAlert("인쇄 완료!");
       console.log('Uploaded to S3:', response);
     } catch (error) {
       console.error('Error uploading to S3:', error);
+      handleAlert("인쇄 오류");
     }
   };
 
@@ -79,8 +81,7 @@ export const Loading = (): JSX.Element => {
   
     // Blob을 S3로 전송
     await uploadBlobToS3(blob, fileName);
-    await asyncAlert("인쇄 완료");
-    navigate("/result", {state: {imageSrc}});
+    // navigate("/result", {state: {imageSrc}});
   };
 
   const handleSkipClick = () => {
@@ -88,16 +89,7 @@ export const Loading = (): JSX.Element => {
     navigate("/result", { state: { imageSrc } });
   };
 
-  const asyncAlert = (message:string) => {
-    return new Promise((resolve, reject) => {
-      handleAlert(message);
-      const originalClose = closeModal;
-      closeModal = () => {
-        originalClose();
-        resolve(1);
-      }
-    });
-  }
+
   const [studentNumber, setStudentNumber] = useState<InputState>({ value: "", isValid: true });
   const [name, setName] = useState<InputState>({ value: "", isValid: true });
 
