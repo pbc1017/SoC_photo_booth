@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { SelectNumber } from "components/SelectNumber";
 import { SelectPhoto } from "components/SelectPhoto";
 import { SelectFrame } from "components/SelectFrame";
+import { SelectFilter } from "components/SelectFilter";
 import html2canvas from "html2canvas";
 import { useRef } from "react";
 import  {WarningModal}  from 'components/WarningModal';
 
 import "./style.css";
-import { SelectFilter } from "components/SelectFilter";
 
 export const Select = (): JSX.Element => {
     // modal 설정
