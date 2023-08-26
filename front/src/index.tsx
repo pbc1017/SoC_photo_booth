@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ReactModal from 'react-modal';
+import "assets/fonts/Font.css"
 ReactModal.setAppElement('#root');
 ReactDOM.render(
     <React.StrictMode>

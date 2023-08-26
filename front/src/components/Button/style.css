@@ -1,6 +1,6 @@
 .button {
   align-items: center;
-  background-color: #25a7fd;
+  background-color: #35b7fd;
   display: flex;
   justify-content: center;
   padding: 1.5vh 10vh;
@@ -9,13 +9,14 @@
   margin-left: calc(var(--vh, 1vh) * -4); */
   width: 100%;
   border: none;
+  border-radius: 5px;
 }
 
 .button .text-wrapper {
   color: #000000;
-  font-family: "NanumSquareRound-Bold", Helvetica;
+  font-family: "MBC1961GulimM";
   font-size: 3vh;
-  font-weight: 700;
+  font-weight: 200;
   letter-spacing: 0;
   line-height: normal;
   position: relative;

@@ -2,8 +2,18 @@
   position: absolute;
   width: 80%;
   height: 90%;
-  top: 0%;
+  top: 0.5%;
   left: 10%;
+  /* border: 1px solid black; */
+}
+
+.options .photosOut {
+  position: absolute;
+  width: 80%;
+  height: 90%;
+  top: calc(0.5% - 1px);
+  left: calc(10% - 1px);
+  border: 1px solid black;
 }
 
 .options .photo-frame {
@@ -16,8 +26,104 @@
 
 .options .frame-buttons {
   position: absolute;
-  width: 80%;
-  height: 20%;
-  top: 93%;
-  left: 10%;
+  width: 100%;
+  height: 7.5%;
+  top: 92.5%;
+}
+
+.options .button-0,
+.options .button-1,
+.options .button-2,
+.options .button-3 {
+  width: 20%;
+  height: 95%;
+  margin-left: 3%;
+}
+.options .button-0 {
+  margin-left: 5.5%;
+}
+
+.options .Photo-1-0 {
+  position: absolute; 
+  width: 88.5% !important;
+  height: 79% !important;
+}
+.options .Photo-1-0 {
+  left: 5.75% !important;
+  top: 3.83% !important;
+}
+
+.options .Photo-2-0,
+.options .Photo-2-1 {
+  position: absolute; 
+  width: 77% !important;
+  height: 38.5% !important;
+}
+.options .Photo-2-0 {
+  top: 3.83% !important;
+  left: 5.75% !important;
+}
+.options .Photo-2-1 {
+  top: 46.17% !important;
+  left: 17.25% !important;
+}
+
+.options .Photo-4-0,
+.options .Photo-4-1,
+.options .Photo-4-2,
+.options .Photo-4-3 {
+  position: absolute; 
+  width: 42.5% !important;
+  height: 37.83% !important;
+}
+.options .Photo-4-0 {
+  top: 17.5% !important;
+  left: 5% !important;
+}
+.options .Photo-4-1 {
+  top: 3.33% !important;
+  left: 52.5% !important;
+}
+.options .Photo-4-2 {
+  top: 58.83% !important;
+  left: 5% !important;
+}
+.options .Photo-4-3 {
+  top: 44.83% !important;
+  left: 52.5% !important;
+}
+
+.options .Photo-6-0,
+.options .Photo-6-1,
+.options .Photo-6-2,
+.options .Photo-6-3,
+.options .Photo-6-4,
+.options .Photo-6-5 {
+  position: absolute;
+  height: 21.33% !important;
+  width: 42.5% !important;
+}
+.options .Photo-6-0 {
+  top: 21.5% !important;
+  left: 5% !important;
+}
+.options .Photo-6-1 {
+  top: 8.17% !important;
+  left: 52.5% !important;
+}
+.options .Photo-6-2 {
+  top: 46% !important;
+  left: 5% !important;
+}
+.options .Photo-6-3 {
+  top: 32.67% !important;
+  left: 52.5% !important;
+}
+.options .Photo-6-4 {
+  top: 70.67% !important;
+  left: 5% !important;
+}
+.options .Photo-6-5 {
+  top: 57.33% !important;
+  left: 52.5% !important;
 }

@@ -3,6 +3,7 @@
 }
 
 .modal-content {
+  font-family: "MBC1961GulimM";
   /* margin: auto; */
   width: 300px !important;
   height: 200px;
@@ -21,16 +22,18 @@
 }
 
 .modal-close-button {
+  font-family: "MBC1961GulimM";
   margin-top: 20px;
   padding: 8px 16px;
   border: none;
-  background-color: #4caf50;
-  color: white;
+  background-color: #35b7fd;
+  color: #000000;
   font-size: 16px;
   cursor: pointer;
   border-radius: 3px;
+  border: none;
 }
-
+/* 
 .modal-close-button:hover {
   background-color: #45a049;
-}
+} */

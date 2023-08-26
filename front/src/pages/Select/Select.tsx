@@ -139,7 +139,7 @@ export const Select = (): JSX.Element => {
                 navigate('/loading', { state: { imageSrc: imageUrl } }); // URL을 다음 경로로 전달
               }
             },
-            'image/jpeg',
+            'image/png',
             0.8
           );
 
@@ -174,7 +174,8 @@ export const Select = (): JSX.Element => {
       } else if(page === 2){
         console.log(compressedImages.length);
         console.log((selectedOption as number) + 1);
-        if(compressedImages.length === (selectedOption as number) + 1 && compressedImages[0] !== undefined){
+        let imageNum = [1,2,4,6];
+        if(compressedImages.length === imageNum[(selectedOption as number)] && compressedImages[0] !== undefined){
           setPage(page + 1);
         }
         else{
@@ -219,29 +220,6 @@ export const Select = (): JSX.Element => {
         setSelectedOption(optionIndex);
         setCompressedImages([]);
     };
-
-    // const getPhotoEmptyCount = () => {
-    //   switch (selectedOption) {
-    //     case 0:
-    //       return 1;
-    //     case 1:
-    //       return 2;
-    //     case 2:
-    //       return 4;
-    //     case 3:
-    //       return 6;
-    //     default:
-    //       return 0;
-    //   }
-    // };
-    // const numPhoto = getPhotoEmptyCount();
-    // const photoList = Array.from({ length: numPhoto }, (_, index) => (
-    //   <img
-    //     key={index}
-    //     className={`fianlPhoto-${numPhoto}-${index}`}
-    //     src={compressedImages[index]}
-    //   />
-    // ));
 
     const h1s = ["사진 개수 선택","사진 선택","프레임 선택","필터 선택"];
     const h2s = ["원하는 사진 개수를 선택해주세요","원하는 사진을 선택/촬영해주세요","원하는 프레임을 선택해주세요","원하는 필터를 선택해주세요"]
