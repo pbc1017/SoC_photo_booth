@@ -16,6 +16,31 @@ export const ImageCropper = ({ children, aspectRatio, onCrop, hasImage }: PropsT
   const [image, setImage] = useState<null | string>(null);
   const originalImageRef = useRef<string | null>(null); // 원본 이미지 URL을 저장할 ref 생성
 
+  const resizeToMaxDimensions = (imageSrc: string, maxWidth = 2000, maxHeight = 2000): Promise<string> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = imageSrc;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+  
+        if (width > maxWidth || height > maxHeight) {
+          const scalingFactor = Math.min(maxWidth / width, maxHeight / height);
+          width *= scalingFactor;
+          height *= scalingFactor;
+        }
+  
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, width, height);
+  
+        resolve(canvas.toDataURL());
+      };
+    });
+  };
+  
   const handleChildrenClick = useCallback(() => {
     if (hasImage) {
       const isConfirmed = window.confirm("이미지를 삭제하시겠습니까?");
@@ -28,7 +53,7 @@ export const ImageCropper = ({ children, aspectRatio, onCrop, hasImage }: PropsT
     }
   }, [hasImage, onCrop]);
 
-  const resizeImage = (imageSrc: string, factor = 8): Promise<string> => {
+  const resizeImage = (imageSrc: string, factor = 4): Promise<string> => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = imageSrc;
@@ -57,8 +82,9 @@ export const ImageCropper = ({ children, aspectRatio, onCrop, hasImage }: PropsT
     reader.readAsDataURL(file);
     reader.onload = async () => {
       const originalSrc = reader.result as string;
-      originalImageRef.current = originalSrc; // 원본 이미지를 저장
-      const resizedImage = await resizeImage(originalSrc); // 이미지 리사이징
+      const resizedImageToMaxDimensions = await resizeToMaxDimensions(originalSrc); // 최대 해상도로 이미지를 조정
+      originalImageRef.current = resizedImageToMaxDimensions; // 최대 해상도로 조정된 이미지를 저장
+      const resizedImage = await resizeImage(resizedImageToMaxDimensions); // 이미지 리사이징
       setImage(resizedImage);
     };
   };
