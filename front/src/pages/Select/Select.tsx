@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "components/Button";
 import { useNavigate } from "react-router-dom";
 import { SelectNumber } from "components/SelectNumber";
@@ -32,6 +32,25 @@ export const Select = (): JSX.Element => {
         document.documentElement.style.setProperty('--vh', `${vh}px`)
     })
 
+    useEffect(() => {
+      // Resize 이벤트 핸들러
+      const handleResize = () => {
+          const viewportWidth = window.innerWidth;
+          const scale = viewportWidth < 500 ? viewportWidth / 500 : 1;
+          const rootDiv = document.querySelector('.div') as HTMLDivElement;
+          if (rootDiv) {
+              rootDiv.style.transform = `scale(${scale})`;
+          }
+      };
+
+      // 컴포넌트 마운트 시 이벤트 리스너 등록
+      window.addEventListener('resize', handleResize);
+      handleResize(); // 초기 크기 조정
+
+      // 컴포넌트 언마운트 시 이벤트 리스너 해제
+      return () => window.removeEventListener('resize', handleResize);
+    }, []); 
+
     const [page, setPage] = useState<number>(1);
     const [selectedOption, setSelectedOption] = useState<number | null>(null); // 마지막으로 선택된 옵션 저장
     const [compressedImages, setCompressedImages] = useState<string[]>([]);
@@ -58,9 +77,9 @@ export const Select = (): JSX.Element => {
         switch (filterOption) {
           case 1: // 밝게
             for (let i = 0; i < pixels.length; i += 4) {
-              pixels[i] += 50; // R
-              pixels[i + 1] += 50; // G
-              pixels[i + 2] += 50; // B
+              pixels[i] *= 1.2; // R
+              pixels[i + 1] *= 1.2;
+              pixels[i + 2] *= 1.2;
             }
             break;
           case 2: // 흑백

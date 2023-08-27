@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "components/Button";
 import { useNavigate, useLocation } from "react-router-dom"; // useLocation 추가
+import home_example from "assets/images/home_example.png"
 import "./style.css";
 
 export const Result = (): JSX.Element => {
@@ -14,7 +15,7 @@ export const Result = (): JSX.Element => {
   const location = useLocation(); // location 가져오기
 
   // 넘겨받은 이미지 src 가져오기
-  const imageSrc = location.state?.imageSrc || ""; // 초기 이미지를 원한다면 `home_example`로 설정 가능
+  const imageSrc = location.state?.imageSrc || home_example; // 초기 이미지를 원한다면 `home_example`로 설정 가능
 
   const handleShareClick = async () => {
     // 이미지를 Fetch로 가져옵니다.

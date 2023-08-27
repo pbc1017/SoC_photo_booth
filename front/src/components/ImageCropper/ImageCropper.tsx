@@ -16,7 +16,7 @@ export const ImageCropper = ({ children, aspectRatio, onCrop, hasImage }: PropsT
   const [image, setImage] = useState<null | string>(null);
   const originalImageRef = useRef<string | null>(null); // 원본 이미지 URL을 저장할 ref 생성
 
-  const resizeToMaxDimensions = (imageSrc: string, maxWidth = 2000, maxHeight = 2000): Promise<string> => {
+  const resizeToMaxDimensions = (imageSrc: string, maxWidth = 1500, maxHeight = 1500): Promise<string> => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = imageSrc;
