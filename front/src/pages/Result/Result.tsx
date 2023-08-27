@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "components/Button";
 import { useNavigate, useLocation } from "react-router-dom"; // useLocation 추가
 import home_example from "assets/images/home_example.png"
@@ -12,11 +12,25 @@ export const Result = (): JSX.Element => {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   });
   const navigate = useNavigate();
-  const location = useLocation(); // location 가져오기
+  const location = useLocation();
 
-  // 넘겨받은 이미지 src 가져오기
-  const imageSrc = location.state?.imageSrc || home_example; // 초기 이미지를 원한다면 `home_example`로 설정 가능
+  let initialImageSrc = sessionStorage.getItem('imageSrc');
 
+// 이미지가 세션 스토리지에 없거나 유효하지 않다면 기본 이미지로 설정합니다.
+if (!initialImageSrc || initialImageSrc === "null") {
+  initialImageSrc = home_example;
+}
+
+// 넘겨받은 이미지 src 가져오기
+const [imageSrc, setImageSrc] = useState<string>(initialImageSrc);
+
+useEffect(() => {
+  if (location.state?.imageSrc) {
+    setImageSrc(location.state.imageSrc);
+    sessionStorage.setItem('imageSrc', location.state.imageSrc);  // 세션 스토리지에 이미지 URL을 저장합니다.
+  }
+}, [location.state?.imageSrc]);
+  
   const handleShareClick = async () => {
     // 이미지를 Fetch로 가져옵니다.
     const response = await fetch(imageSrc);

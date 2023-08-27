@@ -36,7 +36,7 @@ export const Select = (): JSX.Element => {
       // Resize 이벤트 핸들러
       const handleResize = () => {
           const viewportWidth = window.innerWidth;
-          const scale = viewportWidth < 500 ? viewportWidth / 500 : 1;
+          const scale = viewportWidth < 450 ? viewportWidth / 450 : 1;
           const rootDiv = document.querySelector('.div') as HTMLDivElement;
           if (rootDiv) {
               rootDiv.style.transform = `scale(${scale})`;
