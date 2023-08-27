@@ -1,6 +1,7 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const mongoose = require('mongoose');
 // const mongoose = require('mongoose');
 // const fs=require('fs')
@@ -11,9 +12,11 @@ const mongoose = require('mongoose');
 
 var app = express();
 var server = require('http').createServer(app);
+const frontBuildPath = path.join(__dirname, '../front/build');
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(frontBuildPath));
 
 mongoose.connect('mongodb+srv://user:1234@cluster0.z1goqxn.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -79,19 +82,11 @@ async function addRequest(requestType) {
   });
 
   await newRequest.save();
-  }
+}
 
-app.post('/api/login', async (req, res) => {
-  try {
-    console.log(req.body);
-    await client.connect();
-    userdata = client.db('User').collection('user');
-    const result = await userdata.find(req.body).toArray();
-    if (result.length > 0) {
-      res.json(result[0]);
-    } else res.json('false');
-  } finally {
-  }
+// 루트 경로에 대한 GET 요청 처리
+app.get('/', function (req, res) {
+  res.sendFile(path.join(frontBuildPath, 'index.html'));
 });
 
 // POST /api/photo
@@ -118,22 +113,25 @@ app.get('/api/print', async (req, res) => {
   res.json({ printRequestCount: currentStats.count });
 });
 
-server.listen(3000, main);
+app.get('*', function (req, res) {
+  res.sendFile(path.join(frontBuildPath, 'index.html'));
+});
+
+server.listen(80, main);
 
 //DB CODE
 
-const uri =
-  'mongodb+srv://knsol2:1017@cluster0.ussb1gv.mongodb.net/?retryWrites=true&w=majority';
+// const uri = 'mongodb+srv://knsol2:1017@cluster0.ussb1gv.mongodb.net/?retryWrites=true&w=majority';
 //api key E2kpU7xTXiQrNi6WEWE6p1gNFC6dCpd4ZcMEuWHgsn0NHyc86dB3pGVSSwWED7Uz
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
+// const client = new MongoClient(uri, {
+//   serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true,
+//   },
+// });
 
 // //이미지 합성 변수
 // const images = [
