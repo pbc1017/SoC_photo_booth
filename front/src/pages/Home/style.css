@@ -40,7 +40,7 @@
 
 .home .h-1 {
   color: #000000;
-  font-family: "NanumSquareRound-Light", Helvetica;
+  font-family: "NanumSquareRound-Light";
   font-size: 12vh;
   font-size: calc(var(--vh, 1vh) * 12);
   font-weight: 300;
@@ -63,5 +63,5 @@
   object-fit: contain;
   position: absolute;
   top: 40%;
-  width: 182px;
+  width: 150px;
 }

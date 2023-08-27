@@ -18,19 +18,20 @@
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  border: none;
 }
 
 .modal-close-button {
   margin-top: 20px;
   padding: 8px 16px;
   border: none;
-  background-color: #4caf50;
-  color: white;
+  background-color: #35b7fd;
+  color: #000000;
   font-size: 16px;
   cursor: pointer;
   border-radius: 3px;
 }
-
+/* 
 .modal-close-button:hover {
   background-color: #45a049;
-}
+} */

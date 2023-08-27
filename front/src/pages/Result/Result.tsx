@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "components/Button";
 import { useNavigate, useLocation } from "react-router-dom"; // useLocation 추가
+import home_example from "assets/images/home_example.png"
 import "./style.css";
 
 export const Result = (): JSX.Element => {
@@ -11,27 +12,54 @@ export const Result = (): JSX.Element => {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   });
   const navigate = useNavigate();
-  const location = useLocation(); // location 가져오기
+  const location = useLocation();
 
-  // 넘겨받은 이미지 src 가져오기
-  const imageSrc = location.state?.imageSrc || ""; // 초기 이미지를 원한다면 `home_example`로 설정 가능
+  let initialImageSrc = sessionStorage.getItem('imageSrc');
 
-  const handleShareClick = () => {
-    // 서버로 이미지 src 전송
-    // axios.post("/api/print", { imageSrc })
-    //   .then(() => {
-    //     // 성공 시 처리
-    //   })
-    //   .catch((error) => {
-    //     console.error("Print error:", error);
-    //   });
+// 이미지가 세션 스토리지에 없거나 유효하지 않다면 기본 이미지로 설정합니다.
+if (!initialImageSrc || initialImageSrc === "null") {
+  initialImageSrc = home_example;
+}
+
+// 넘겨받은 이미지 src 가져오기
+const [imageSrc, setImageSrc] = useState<string>(initialImageSrc);
+
+useEffect(() => {
+  if (location.state?.imageSrc) {
+    setImageSrc(location.state.imageSrc);
+    sessionStorage.setItem('imageSrc', location.state.imageSrc);  // 세션 스토리지에 이미지 URL을 저장합니다.
+  }
+}, [location.state?.imageSrc]);
+  
+  const handleShareClick = async () => {
+    // 이미지를 Fetch로 가져옵니다.
+    const response = await fetch(imageSrc);
+    const blob = await response.blob();
+  
+    // Blob을 File 객체로 변환합니다.
+    const file = new File([blob], 'image.png', { type: 'image/png' });
+  
+    // 네이티브 공유 다이얼로그를 열고 이미지를 공유합니다.
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          files: [file],
+          title: '공유 이미지',
+          text: '<전산네컷>에서 제작한 이미지 입니다! \n나도 만들러 가기: https://naver.com',
+        });
+      } else {
+        alert('이 브라우저에서는 이미지 공유 기능이 지원되지 않습니다.');
+      }
+    } catch (error) {
+      console.error('Error sharing:', error);
+    }
   };
 
   const handleSaveClick = () => {
     // 이미지를 다운로드
     const link = document.createElement("a");
     link.href = imageSrc;
-    link.download = "image.jpg";
+    link.download = "image.png";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

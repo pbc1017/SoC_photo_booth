@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "components/Button";
 import { useNavigate } from "react-router-dom";
 import { SelectNumber } from "components/SelectNumber";
@@ -32,6 +32,25 @@ export const Select = (): JSX.Element => {
         document.documentElement.style.setProperty('--vh', `${vh}px`)
     })
 
+    useEffect(() => {
+      // Resize 이벤트 핸들러
+      const handleResize = () => {
+          const viewportWidth = window.innerWidth;
+          const scale = viewportWidth < 450 ? viewportWidth / 450 : 1;
+          const rootDiv = document.querySelector('.div') as HTMLDivElement;
+          if (rootDiv) {
+              rootDiv.style.transform = `scale(${scale})`;
+          }
+      };
+
+      // 컴포넌트 마운트 시 이벤트 리스너 등록
+      window.addEventListener('resize', handleResize);
+      handleResize(); // 초기 크기 조정
+
+      // 컴포넌트 언마운트 시 이벤트 리스너 해제
+      return () => window.removeEventListener('resize', handleResize);
+    }, []); 
+
     const [page, setPage] = useState<number>(1);
     const [selectedOption, setSelectedOption] = useState<number | null>(null); // 마지막으로 선택된 옵션 저장
     const [compressedImages, setCompressedImages] = useState<string[]>([]);
@@ -58,9 +77,9 @@ export const Select = (): JSX.Element => {
         switch (filterOption) {
           case 1: // 밝게
             for (let i = 0; i < pixels.length; i += 4) {
-              pixels[i] += 50; // R
-              pixels[i + 1] += 50; // G
-              pixels[i + 2] += 50; // B
+              pixels[i] *= 1.2; // R
+              pixels[i + 1] *= 1.2;
+              pixels[i + 2] *= 1.2;
             }
             break;
           case 2: // 흑백
@@ -139,7 +158,7 @@ export const Select = (): JSX.Element => {
                 navigate('/loading', { state: { imageSrc: imageUrl } }); // URL을 다음 경로로 전달
               }
             },
-            'image/jpeg',
+            'image/png',
             0.8
           );
 
@@ -174,7 +193,8 @@ export const Select = (): JSX.Element => {
       } else if(page === 2){
         console.log(compressedImages.length);
         console.log((selectedOption as number) + 1);
-        if(compressedImages.length === (selectedOption as number) + 1 && compressedImages[0] !== undefined){
+        let imageNum = [1,2,4,6];
+        if(compressedImages.length === imageNum[(selectedOption as number)] && compressedImages[0] !== undefined){
           setPage(page + 1);
         }
         else{
@@ -219,29 +239,6 @@ export const Select = (): JSX.Element => {
         setSelectedOption(optionIndex);
         setCompressedImages([]);
     };
-
-    // const getPhotoEmptyCount = () => {
-    //   switch (selectedOption) {
-    //     case 0:
-    //       return 1;
-    //     case 1:
-    //       return 2;
-    //     case 2:
-    //       return 4;
-    //     case 3:
-    //       return 6;
-    //     default:
-    //       return 0;
-    //   }
-    // };
-    // const numPhoto = getPhotoEmptyCount();
-    // const photoList = Array.from({ length: numPhoto }, (_, index) => (
-    //   <img
-    //     key={index}
-    //     className={`fianlPhoto-${numPhoto}-${index}`}
-    //     src={compressedImages[index]}
-    //   />
-    // ));
 
     const h1s = ["사진 개수 선택","사진 선택","프레임 선택","필터 선택"];
     const h2s = ["원하는 사진 개수를 선택해주세요","원하는 사진을 선택/촬영해주세요","원하는 프레임을 선택해주세요","원하는 필터를 선택해주세요"]
