@@ -32,11 +32,13 @@ httpsServer.listen(443, () => {
   console.log("HTTPS Server running on port 443");
 });
 
-app.use((req, res, next) => {
-  if (!req.secure) {
-      return res.redirect(['https://', req.get('Host'), req.url].join(''));
-  }
-  next();
+app.enable('trust proxy');
+app.use(function(req, res, next){
+        if(!req.secure){
+                res.redirect("https://"+ req.headers.host + req.url);
+        }else{
+                next();
+        }
 });
 
 mongoose.connect('mongodb+srv://user:1234@cluster0.z1goqxn.mongodb.net/?retryWrites=true&w=majority', {
