@@ -3,12 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
-// const mongoose = require('mongoose');
-// const fs=require('fs')
-// const prompt=require('prompt-sync')({singint:true});
-
-// import * as roomRepository from './data/room.js';
-// import * as userRepository from './data/users.js';
+const http = require('http');
+const https = require('https'); // HTTPS 를 위한 라이브러리 추가
+const fs = require('fs'); 
 
 var app = express();
 var server = require('http').createServer(app);
@@ -17,6 +14,23 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(frontBuildPath));
+
+const options = {
+  key: fs.readFileSync('./rootca.key'),
+  cert: fs.readFileSync('./rootca.crt')
+};
+
+// 원래의 HTTP 서버 생성
+const httpServer = http.createServer(app);
+httpServer.listen(80, () => {
+  console.log("HTTP Server running on port 80");
+});
+
+// 새로운 HTTPS 서버 생성
+const httpsServer = https.createServer(options, app);
+httpsServer.listen(443, () => {
+  console.log("HTTPS Server running on port 443");
+});
 
 mongoose.connect('mongodb+srv://user:1234@cluster0.z1goqxn.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -121,7 +135,7 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(frontBuildPath, 'index.html'));
 });
 
-server.listen(80, main);
+// server.listen(80, main);
 
 //DB CODE
 
@@ -150,7 +164,5 @@ server.listen(80, main);
 // const { combineImages } = require('./image_frame');
 
 function main() {
-  //await collection.updateOne(QUERYDATA},{$set:{CHANGEDATA}})
   console.log('Server On');
-  // combineImages(images, outputPath, backgroundImagePath);
 }
