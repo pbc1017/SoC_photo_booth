@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import home_example from "assets/images/home_example.png"
 import { NotifyModal } from "components/NotifyModal";
 import "./style.css";
+import { error } from 'console';
 
 
 AWS.config.update({
@@ -14,6 +15,8 @@ AWS.config.update({
 });
 
 const s3 = new AWS.S3();
+
+let errorOccurred = false;
 
 type InputState = {
   value: string;
@@ -34,7 +37,8 @@ export const Loading = (): JSX.Element => {
     setIsModalOpen(false);
     if (shouldNavigateAfterClose) {
       setShouldNavigateAfterClose(false); // 상태를 초기화
-      navigate("/result", { state: { imageSrc } });
+      if (!errorOccurred) {
+      navigate("/result", { state: { imageSrc } });}
     }
   };
 
@@ -45,25 +49,11 @@ export const Loading = (): JSX.Element => {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   });
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation(); // location 가져오기
 
-  let initialImageSrc = sessionStorage.getItem('imageSrc');
+  // 넘겨받은 이미지 src 가져오기
+  const imageSrc = location.state?.imageSrc || home_example; // 초기 이미지를 원한다면 `home_example`로 설정 가능
 
-// 이미지가 세션 스토리지에 없거나 유효하지 않다면 기본 이미지로 설정합니다.
-if (!initialImageSrc || initialImageSrc === "null") {
-  initialImageSrc = home_example;
-}
-
-// 넘겨받은 이미지 src 가져오기
-const [imageSrc, setImageSrc] = useState<string>(initialImageSrc);
-
-useEffect(() => {
-  if (location.state?.imageSrc) {
-    setImageSrc(location.state.imageSrc);
-    sessionStorage.setItem('imageSrc', location.state.imageSrc);  // 세션 스토리지에 이미지 URL을 저장합니다.
-  }
-}, [location.state?.imageSrc]);
-  
   const uploadBlobToS3 = async (blob: Blob, fileName: string) => {
     const params: AWS.S3.PutObjectRequest = {
       Bucket: 'soc-photo',
@@ -75,8 +65,10 @@ useEffect(() => {
     try {
       const response = await s3.upload(params).promise();
       console.log('Uploaded to S3:', response);
+      return false;
     } catch (error) {
       console.error('Error uploading to S3:', error);
+      return true;
     }
   };
 
@@ -100,25 +92,20 @@ useEffect(() => {
     const response = await fetch(imageSrc);
     const blob = await response.blob();
     const fileName = studentNumber.value + '_' + name.value + '_' + getCurrentDateTime() +'.png';
-    await uploadBlobToS3(blob, fileName);
+    errorOccurred = await uploadBlobToS3(blob, fileName);
     setShouldNavigateAfterClose(true);
-    handleAlert("인쇄 준비 완료");
+    if (errorOccurred) { 
+      handleAlert("인쇄 준비 중 오류가 발생했습니다. 다시 시도해주세요");
+    } else { 
+      handleAlert("인쇄 준비 완료");
+    }
   };
 
   const handleSkipClick = () => {
     navigate("/result", { state: { imageSrc } });
   };
 
-  // const asyncAlert = (message:string) => {
-  //   return new Promise((resolve, reject) => {
-  //     handleAlert(message);
-  //     const originalClose = closeModal;
-  //     closeModal = () => {
-  //       originalClose();
-  //       resolve(1);
-  //     }
-  //   });
-  // }
+
   const [studentNumber, setStudentNumber] = useState<InputState>({ value: "", isValid: true });
   const [name, setName] = useState<InputState>({ value: "", isValid: true });
 
