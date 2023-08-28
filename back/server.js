@@ -89,6 +89,10 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(frontBuildPath, 'index.html'));
 });
 
+app.get('/.well-known/pki-validation/E9B295FE981D0935321859051BE60789.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, 'E9B295FE981D0935321859051BE60789.txt'));
+});
+
 // POST /api/photo
 app.post('/api/photo', async (req, res) => {
   await addRequest('photo');
