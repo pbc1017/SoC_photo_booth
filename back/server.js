@@ -8,12 +8,22 @@ const https = require('https'); // HTTPS 를 위한 라이브러리 추가
 const fs = require('fs'); 
 
 var app = express();
-var server = require('http').createServer(app);
 const frontBuildPath = path.join(__dirname, '../front/build');
+app.set('trust proxy', true);  // Express가 프록시 뒤에서 실행될 때 필요
+
+app.use((req, res, next) => {
+    if (!req.secure) {
+        // HTTP 요청만 리다이렉트
+        return res.redirect(301, `https://${req.get('Host')}${req.url}`);
+    }
+    next();
+});
+
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(frontBuildPath));
+app.set('trust proxy', true);  // Express가 프록시 뒤에서 실행될 때 필요
 
 const options = {
   key: fs.readFileSync('./rootca.key'),
@@ -30,15 +40,6 @@ httpServer.listen(80, () => {
 const httpsServer = https.createServer(options, app);
 httpsServer.listen(443, () => {
   console.log("HTTPS Server running on port 443");
-});
-
-app.enable('trust proxy');
-app.use(function(req, res, next){
-        if(!req.secure){
-                res.redirect("https://"+ req.headers.host + req.url);
-        }else{
-                next();
-        }
 });
 
 mongoose.connect('mongodb+srv://user:1234@cluster0.z1goqxn.mongodb.net/?retryWrites=true&w=majority', {
