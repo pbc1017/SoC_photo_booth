@@ -34,35 +34,7 @@ useEffect(() => {
 }, [location.state?.imageSrc]);
   
   const handleShareClick = async () => {
-    try {
-      // 서버 주소는 본인의 환경에 맞게 수정하세요.
-      const response = await fetch(api_link_share, {
-        method: 'POST'
-      });
   
-      // 응답 상태가 200인 경우에 대한 처리를 합니다.
-      if (response.status === 200) {
-        console.log('POST 요청이 성공적으로 처리되었습니다.');
-      }
-      else{
-        console.log('POST 실패...');
-      }
-    } catch (error) {
-      console.error('POST 요청 중 오류가 발생했습니다:', error);
-    }
-
-    try {
-      // 서버 주소는 본인의 환경에 맞게 수정하세요.
-      const response = await fetch(api_link_share);
-      const data = await response.json();
-  
-      // 서버로부터 받은 데이터를 활용하여 처리합니다.
-      console.log('printRequestCount:', data.printRequestCount);
-    } catch (error) {
-      console.error('GET 요청 중 오류가 발생했습니다:', error);
-    }
-
-    
     // 이미지를 Fetch로 가져옵니다.
     const response = await fetch(imageSrc);
     const blob = await response.blob();

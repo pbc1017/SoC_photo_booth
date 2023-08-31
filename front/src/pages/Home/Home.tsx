@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Button } from "components/Button";
 import { useNavigate} from "react-router-dom";
 import { NotifyModal } from "components/NotifyModal";
@@ -14,6 +14,8 @@ export const Home = (): JSX.Element => {
     })
     
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+    const [printCnt, setPrintCnt] = useState<Number>(0);
+    const [makeCnt, setMakeCnt] = useState<Number>(0);
     const closeModal = (): void => {
         setIsModalOpen(false);
       };
@@ -22,6 +24,26 @@ export const Home = (): JSX.Element => {
         navigate("/select");
     };
 
+    const loadingdata = async() => {
+        try {
+            // 서버 주소는 본인의 환경에 맞게 수정하세요.
+            var response = await fetch("https://localhost/api/print");
+            var data1 = await response.json();
+            setPrintCnt(data1.printRequestCount);
+            console.log('shareRequestCount:', data1.printRequestCount);
+            response = await fetch("https://localhost/api/share");
+            var data2 = await response.json();
+            setMakeCnt(data1.printRequestCount + data2.printRequestCount);
+            console.log('printRequestCount:', data2.printRequestCount);
+        } catch (error) {
+            console.error('GET 요청 중 오류가 발생했습니다:', error);
+        }
+    }
+
+    useEffect(() => {
+        loadingdata();
+    }, []);
+    
     return (
         <div className="home">
             <div className="div">
@@ -33,6 +55,7 @@ export const Home = (): JSX.Element => {
                     네컷
                 </h1>
                 <img className="element" alt="Element" src={home_example} />
+                <div className="numbers">{`만든 네컷:${makeCnt}장 인쇄한 네컷:${printCnt}장`}</div>
             </div>
         </div>
     );

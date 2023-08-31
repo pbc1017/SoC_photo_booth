@@ -55,7 +55,7 @@ mongoose.connect('mongodb+srv://user:1234@cluster0.z1goqxn.mongodb.net/?retryWri
 const requestSchema = new mongoose.Schema({
   requestType: {
     type: String,
-    enum: ['photo', 'print'],
+    enum: ['photo', 'print', 'share'],
     required: true,
   },
   requestTime: {
@@ -67,7 +67,7 @@ const requestSchema = new mongoose.Schema({
 const countSchema = new mongoose.Schema({
   requestType: {
     type: String,
-    enum: ['photo', 'print'],
+    enum: ['photo', 'print', 'share'],
     required: true,
   },
   count: {
