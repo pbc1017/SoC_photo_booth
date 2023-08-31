@@ -6,6 +6,7 @@ import { Result } from 'pages/Result'
 import { Select } from 'pages/Select'
 
 import Home from './Home'
+import { Admin } from 'pages/Admin'
 import { PhotoEditGrid } from 'components/PhotoEditGrid'
 
 export default function RouteSetup() {
@@ -15,6 +16,7 @@ export default function RouteSetup() {
             <Route path= "/select" element = {<Select/>}/>
             <Route path= "/loading" element = {<Loading/>}/>
             <Route path= "/result" element = {<Result/>}/>
+            <Route path= "/admin/apfhskaktlWjd" element = {<Admin/>}/>
         </Routes>
     )
 }

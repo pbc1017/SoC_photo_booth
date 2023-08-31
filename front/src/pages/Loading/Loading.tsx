@@ -29,6 +29,9 @@ export const Loading = (): JSX.Element => {
   const [warningMessage, setWarningMessage] = useState<string>("");
   const [shouldNavigateAfterClose, setShouldNavigateAfterClose] = useState(false);
   
+  //이거 수정해야 함
+  const api_link = "https://localhost/api/print" 
+
   const handleAlert = (message: string): void => {
     setWarningMessage(message);
     setIsModalOpen(true);
@@ -97,7 +100,21 @@ export const Loading = (): JSX.Element => {
     if (errorOccurred) { 
       handleAlert("인쇄 준비 중 오류가 발생했습니다. 다시 시도해주세요");
     } else { 
-      handleAlert("인쇄 준비 완료");
+      try {
+        // 서버 주소는 본인의 환경에 맞게 수정하세요.
+        const response = await fetch(api_link, {
+          method: 'POST'
+        });
+    
+        // 응답 상태가 200인 경우에 대한 처리를 합니다.
+        if (response.status === 200) {
+          console.log('POST 요청이 성공적으로 처리되었습니다.');
+          handleAlert("인쇄 준비 완료! 전산학부 부스에 와서 인쇄해주세요!");
+        }
+      } catch (error) {
+        console.error('POST 요청 중 오류가 발생했습니다:', error);
+        handleAlert("인쇄 준비 중 오류가 발생했습니다. 다시 시도해주세요");
+      }
     }
   };
 

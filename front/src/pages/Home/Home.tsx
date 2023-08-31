@@ -34,11 +34,6 @@ export const Home = (): JSX.Element => {
                 </h1>
                 <img className="element" alt="Element" src={home_example} />
             </div>
-            <NotifyModal
-                isOpen={isModalOpen}
-                onRequestClose={(closeModal)}
-                message={"베타버전 입니다.\n9/1(금) 00:00 정식 출시"}
-            />
         </div>
     );
 };

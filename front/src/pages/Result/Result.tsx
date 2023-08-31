@@ -3,6 +3,7 @@ import { Button } from "components/Button";
 import { useNavigate, useLocation } from "react-router-dom"; // useLocation 추가
 import home_example from "assets/images/home_example.png"
 import "./style.css";
+import { request } from "http";
 
 export const Result = (): JSX.Element => {
   let vh = window.innerHeight * 0.01;
@@ -13,7 +14,8 @@ export const Result = (): JSX.Element => {
   });
   const navigate = useNavigate();
   const location = useLocation();
-
+  const api_link_share = "https://localhost/api/share"
+  const api_link_download = "https://localhost/api/photo"
   let initialImageSrc = sessionStorage.getItem('imageSrc');
 
 // 이미지가 세션 스토리지에 없거나 유효하지 않다면 기본 이미지로 설정합니다.
@@ -32,6 +34,35 @@ useEffect(() => {
 }, [location.state?.imageSrc]);
   
   const handleShareClick = async () => {
+    try {
+      // 서버 주소는 본인의 환경에 맞게 수정하세요.
+      const response = await fetch(api_link_share, {
+        method: 'POST'
+      });
+  
+      // 응답 상태가 200인 경우에 대한 처리를 합니다.
+      if (response.status === 200) {
+        console.log('POST 요청이 성공적으로 처리되었습니다.');
+      }
+      else{
+        console.log('POST 실패...');
+      }
+    } catch (error) {
+      console.error('POST 요청 중 오류가 발생했습니다:', error);
+    }
+
+    try {
+      // 서버 주소는 본인의 환경에 맞게 수정하세요.
+      const response = await fetch(api_link_share);
+      const data = await response.json();
+  
+      // 서버로부터 받은 데이터를 활용하여 처리합니다.
+      console.log('printRequestCount:', data.printRequestCount);
+    } catch (error) {
+      console.error('GET 요청 중 오류가 발생했습니다:', error);
+    }
+
+    
     // 이미지를 Fetch로 가져옵니다.
     const response = await fetch(imageSrc);
     const blob = await response.blob();
@@ -45,7 +76,7 @@ useEffect(() => {
         await navigator.share({
           files: [file],
           title: '공유 이미지',
-          text: '<전산네컷>에서 제작한 이미지 입니다! \n나도 만들러 가기: https://naver.com',
+          text: '<전산네컷>에서 제작한 이미지 입니다! \n나도 만들러 가기: https://socphoto.shop/',
         });
       } else {
         alert('이 브라우저에서는 이미지 공유 기능이 지원되지 않습니다.');
@@ -55,8 +86,25 @@ useEffect(() => {
     }
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     // 이미지를 다운로드
+    try {
+      // 서버 주소는 본인의 환경에 맞게 수정하세요.
+      const response = await fetch(api_link_download, {
+        method: 'POST'
+      });
+  
+      // 응답 상태가 200인 경우에 대한 처리를 합니다.
+      if (response.status === 200) {
+        console.log('POST 요청이 성공적으로 처리되었습니다.');
+      }
+      else{
+        console.log('POST 실패...');
+      }
+    } catch (error) {
+      console.error('POST 요청 중 오류가 발생했습니다:', error);
+    }
+
     const link = document.createElement("a");
     link.href = imageSrc;
     link.download = "image.png";

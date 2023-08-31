@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const http = require('http');
 const https = require('https'); // HTTPS 를 위한 라이브러리 추가
 const fs = require('fs'); 
+const AWS = require('aws-sdk');
 
 var app = express();
 const frontBuildPath = path.join(__dirname, '../front/build');
@@ -127,7 +128,7 @@ app.post('/api/photo', async (req, res) => {
 app.get('/api/photo', async (req, res) => {
   const currentStats = await getCurrentCount('photo');
   res.json({ photoRequestCount: currentStats.count });
-})
+});
 
 //POST /api/print
 app.post('/api/print', async (req, res) => {
@@ -139,6 +140,47 @@ app.post('/api/print', async (req, res) => {
 app.get('/api/print', async (req, res) => {
   const currentStats = await getCurrentCount('print');
   res.json({ printRequestCount: currentStats.count });
+});
+
+//POST /api/share
+app.post('/api/share', async (req, res) => {
+  await addRequest('share');
+  res.sendStatus(200);
+});
+
+//GET /api/share
+app.get('/api/share', async (req, res) => {
+  const currentStats = await getCurrentCount('share');
+  res.json({ printRequestCount: currentStats.count });
+});
+
+// AWS SDK 설정
+AWS.config.update({
+  region: 'ap-northeast-2', 
+  credentials: new AWS.Credentials('AKIASXX4F2YI6VYLYLNU', 'c9Cgx+LALeBxJLZc340jjC0AWiClZ/kbgrgBctZO'), 
+});
+const s3 = new AWS.S3();
+
+// /api/search 엔드포인트 처리
+app.get('/api/search', async (req, res) => {
+  const searchTerm = req.query.term; // 검색어 가져오기
+
+  // S3 버킷 내에서 해당 검색어와 관련된 사진 리스트를 가져오는 작업
+  try {
+    const s3Objects = await s3.listObjectsV2({
+      Bucket: 'soc-photo', // S3 버킷 이름을 입력하세요
+      Prefix: searchTerm // 검색어를 사용하여 사진 리스트를 가져옵니다.
+    }).promise();
+
+    const photoUrls = s3Objects.Contents.map(object => {
+      return `https://${object.Bucket}.s3.amazonaws.com/${object.Key}`;
+    });
+
+    res.json({ results: photoUrls }); // 검색 결과를 클라이언트에게 전송
+  } catch (error) {
+    console.error('S3에서 사진 리스트를 가져오는 중 오류 발생:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 app.get('*', function (req, res) {
