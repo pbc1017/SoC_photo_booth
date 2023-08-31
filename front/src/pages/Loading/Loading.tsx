@@ -30,7 +30,7 @@ export const Loading = (): JSX.Element => {
   const [shouldNavigateAfterClose, setShouldNavigateAfterClose] = useState(false);
   
   //이거 수정해야 함
-  const api_link = "https://localhost/api/" 
+  const api_link = "https://socphoto.shop/api/" 
 
   const handleAlert = (message: string): void => {
     setWarningMessage(message);

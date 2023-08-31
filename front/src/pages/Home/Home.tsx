@@ -27,11 +27,11 @@ export const Home = (): JSX.Element => {
     const loadingdata = async() => {
         try {
             // 서버 주소는 본인의 환경에 맞게 수정하세요.
-            var response = await fetch("https://localhost/api/print");
+            var response = await fetch("https://socphoto.shop/api/print");
             var data1 = await response.json();
             setPrintCnt(data1.printRequestCount);
             console.log('shareRequestCount:', data1.printRequestCount);
-            response = await fetch("https://localhost/api/share");
+            response = await fetch("https://socphoto.shop/api/share");
             var data2 = await response.json();
             setMakeCnt(data1.printRequestCount + data2.printRequestCount);
             console.log('printRequestCount:', data2.printRequestCount);
