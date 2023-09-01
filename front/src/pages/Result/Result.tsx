@@ -91,9 +91,11 @@ useEffect(() => {
   return (
     <div className="home">
       <div className="div">
+        <div className="title-1">완성!</div>
+        <div className="title-result" style={{ textAlign: 'center' }}>이제 사진을 저장하거나 공유하세요!</div>
         <Button className="button-1" text="저장하기" onClick={handleSaveClick} />
         <Button className="button-2" text="공유하기" onClick={handleShareClick}/>
-        <img className="element" alt="Element" src={imageSrc} /> {/* 넘겨받은 이미지 src 사용 */}
+        <img className="element-result" alt="Element" src={imageSrc} /> {/* 넘겨받은 이미지 src 사용 */}
       </div>
     </div>
   );

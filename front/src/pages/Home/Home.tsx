@@ -13,7 +13,7 @@ export const Home = (): JSX.Element => {
         document.documentElement.style.setProperty('--vh', `${vh}px`)
     })
     
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [printCnt, setPrintCnt] = useState<Number>(0);
     const [makeCnt, setMakeCnt] = useState<Number>(0);
     const closeModal = (): void => {
@@ -22,6 +22,9 @@ export const Home = (): JSX.Element => {
     const navigate = useNavigate(); // navigate 함수 생성
     const handleStartClick = () => {
         navigate("/select");
+    };
+    const handleHelpClick = () => {
+        setIsModalOpen(true);
     };
 
     const loadingdata = async() => {
@@ -48,7 +51,7 @@ export const Home = (): JSX.Element => {
         <div className="home">
             <div className="div">
                 <Button className="button-1" text="시작하기" onClick={handleStartClick}/>
-                <Button className="button-2" text="도움말" />
+                <Button className="button-2" text="도움말" onClick={handleHelpClick}/>
                 <h1 className="h-1">
                     전산
                     <br />
@@ -56,6 +59,11 @@ export const Home = (): JSX.Element => {
                 </h1>
                 <img className="element" alt="Element" src={home_example} />
                 <div className="numbers">{`만든 네컷:${makeCnt}장 인쇄한 네컷:${printCnt}장`}</div>
+                <NotifyModal
+                    isOpen={isModalOpen}
+                    onRequestClose={(closeModal)}
+                    message={"2023 KAMF 한사랑전산악회 부스에서 운영중인 웹페이지입니다. 사진 인화를 원하시면 부스를 방문해주세요. 감사합니다."}
+                />
             </div>
         </div>
     );

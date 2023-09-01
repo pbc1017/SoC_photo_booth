@@ -3,8 +3,9 @@ import { Button } from "components/Button";
 import { useNavigate, useLocation } from "react-router-dom"; // useLocation 추가
 import * as AWS from 'aws-sdk';
 import toast, { Toaster } from 'react-hot-toast';
-import home_example from "assets/images/home_example.png"
 import { NotifyModal } from "components/NotifyModal";
+import loading from "assets/images/loading.png";
+import home_example from "assets/images/home_example.png";
 import "./style.css";
 import { error } from 'console';
 
@@ -106,8 +107,7 @@ export const Loading = (): JSX.Element => {
     
         if (response.status === 200) {
           console.log('POST 요청이 성공적으로 처리되었습니다.');
-          handleAlert(`인쇄 준비 완료!
-          한사랑전산악회에서 인쇄하기!`);
+          handleAlert('한사랑 전산악회 부스에 방문해서 인쇄해주세요!');
         }
       } catch (error) {
         console.error('POST 요청 중 오류가 발생했습니다:', error);
@@ -125,8 +125,6 @@ export const Loading = (): JSX.Element => {
   
       if (response.status === 200) {
         console.log('POST 요청이 성공적으로 처리되었습니다.');
-        handleAlert(`인쇄 준비 완료!
-        한사랑전산악회에서 인쇄하기!`);
       }
     } catch (error) {
       console.error('POST 요청 중 오류가 발생했습니다:', error);
@@ -177,18 +175,22 @@ export const Loading = (): JSX.Element => {
     placeholder="학번을 입력하세요"
     value={studentNumber.value}
     onChange={(e) =>  handleInputChange(e, "studentNumber")}
+    className="input-number"
     />
     <input
     type="text"
     placeholder="이름을 입력하세요"
     value={name.value}
     onChange={(e) =>  handleInputChange(e, "name")}
+    className="input-name"
     />
     
     <Toaster/>
     <Button className="button-1" text="인쇄하기" onClick={handlePrintClick} />
     <Button className="button-2" text="건너뛰기" onClick={handleSkipClick}/>
-    <img className="element" alt="Element" src={imageSrc} /> {/* 넘겨받은 이미지 src 사용 */}
+    <img className="element-loading" alt="Element" src={loading} /> {/* 넘겨받은 이미지 src 사용 */}
+    <div className="title-1">만드는중</div>
+    <div className="title-2" style={{ textAlign: 'center' }}>사진을 인쇄하려면 학번(전화번호)과<br/>이름을 입력해주세요.</div>
     </div>
     <NotifyModal
       isOpen={isModalOpen}

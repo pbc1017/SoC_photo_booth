@@ -1,3 +1,19 @@
+.home .element-result {
+  height: 65%;
+  left: 50%;
+  transform: translateX(-53%);
+  object-fit: contain;
+  position: absolute;
+  top: 12%;
+  width: 250px;
+}
+.home .title-result {
+  transform: translateX(-2.5%);
+  position: absolute;
+  font-size: 2.2vh;
+  top: 13%;
+  font-family: "MBC1961GulimM";
+}
 /* .home {
   background-color: #ffffff;
   display: flex;

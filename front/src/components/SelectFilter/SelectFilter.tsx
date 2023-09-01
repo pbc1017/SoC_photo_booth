@@ -4,6 +4,14 @@ import frame1 from "assets/images/frame_image_1.png";
 import frame2 from "assets/images/frame_image_2.png";
 import frame3 from "assets/images/frame_image_3.png";
 import frame4 from "assets/images/frame_image_4.png";
+import cover1 from "assets/images/frame_cover_1.png";
+import cover2 from "assets/images/frame_cover_2.png";
+import cover3 from "assets/images/frame_cover_3.png";
+import cover4 from "assets/images/frame_cover_4.png";
+import button1 from "assets/images/filter_button_1.png";
+import button2 from "assets/images/filter_button_2.png";
+import button3 from "assets/images/filter_button_3.png";
+import button4 from "assets/images/filter_button_4.png";
 import "./style.css"
 
 interface SelectFilterProps {
@@ -74,6 +82,8 @@ export const SelectFilter: React.FC<SelectFilterProps> = ({ photoOption,compress
   ));
 
   const frameArray = [frame1,frame2,frame3,frame4]
+  const coverArray = [cover1,cover2,cover3,cover4]
+  const buttonArray = [button1, button2, button3, button4]
 
   return (
     <div className="options">
@@ -81,12 +91,13 @@ export const SelectFilter: React.FC<SelectFilterProps> = ({ photoOption,compress
       <div className='photos' ref={divRef}>
         <img className="photo-frame" src={frameArray[selectedFrameOption]}/>
         {photoList}
+        <img className="photo-frame" src={coverArray[selectedFrameOption]}/>
       </div>
       <div className="frame-buttons">
         {Array.from({ length: 4 }, (_, index) => (
           <img
             className={`button-${index}`}
-            src={frame3}
+            src={buttonArray[index]}
             key={index}
             onClick={() => setSelectedFilterOption(index)}
             style={{ outline: selectedFilterOption === index ? '2px solid black' : 'none' }} // 현재 선택된 버튼만 윤곽선을 검정색으로 설정

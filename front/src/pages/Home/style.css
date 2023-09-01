@@ -65,3 +65,13 @@
   top: 40%;
   width: 150px;
 }
+
+.home .numbers {
+  position: absolute;
+  top: 95% !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+  textAlign: 'center';
+  font-family: "NanumSquareRound-Light";
+  font-size: 12px;
+}

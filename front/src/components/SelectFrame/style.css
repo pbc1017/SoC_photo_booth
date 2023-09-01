@@ -1,7 +1,7 @@
 .options .photos {
   position: absolute;
   width: 80%;
-  height: 90%;
+  height: 88.8%;
   top: 0.5%;
   left: 10%;
   /* border: 1px solid black; */
@@ -10,7 +10,7 @@
 .options .photosOut {
   position: absolute;
   width: 80%;
-  height: 90%;
+  height: 88.8%;
   top: calc(0.5% - 1px);
   left: calc(10% - 1px);
   border: 1px solid black;
