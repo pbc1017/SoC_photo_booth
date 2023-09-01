@@ -185,7 +185,7 @@ export const Loading = (): JSX.Element => {
     className="input-name"
     />
     
-    {/* <Toaster/> */}
+    <Toaster/>
     <Button className="button-1" text="인쇄하기" onClick={handlePrintClick} />
     <Button className="button-2" text="건너뛰기" onClick={handleSkipClick}/>
     <img className="element-loading" alt="Element" src={loading} /> {/* 넘겨받은 이미지 src 사용 */}
