@@ -76,8 +76,21 @@ const countSchema = new mongoose.Schema({
   },
 });
 
+const CounterSchema = new mongoose.Schema({
+  totalCount: { type: Number, default: 0 },
+  totalSum: { type: Number, default: 0 }
+});
+
 const Request = mongoose.model('Request', requestSchema);
 const Count = mongoose.model('Count', countSchema);
+const Counter = mongoose.model('Counter', CounterSchema);
+
+Counter.findOne().then((counter) => {
+  if (!counter) {
+    const initialCounter = new Counter();
+    initialCounter.save();
+  }
+});
 
 async function getCurrentCount(requestType) {
   const currentCount = await Count.findOne({ requestType });
@@ -180,6 +193,32 @@ app.get('/api/search', async (req, res) => {
   } catch (error) {
     console.error('S3에서 사진 리스트를 가져오는 중 오류 발생:', error);
     res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.get('/total-count', async (req, res) => {
+  try {
+    const counter = await Counter.findOne();
+    res.json({ totalCount: counter.totalCount, totalSum: counter.totalSum });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+app.post('/update-count', async (req, res) => {
+  try {
+    const { count } = req.body;
+    const counter = await Counter.findOne();
+
+    counter.totalCount += count;
+    if (count > 0) {
+      counter.totalSum += count;
+    }
+
+    await counter.save();
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 });
 

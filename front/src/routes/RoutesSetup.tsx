@@ -7,7 +7,7 @@ import { Select } from 'pages/Select'
 
 import Home from './Home'
 import { Admin } from 'pages/Admin'
-import { PhotoEditGrid } from 'components/PhotoEditGrid'
+import {KAMFNumCount} from 'pages/KAMFNumCount'
 
 export default function RouteSetup() {
     return (
@@ -17,6 +17,7 @@ export default function RouteSetup() {
             <Route path= "/loading" element = {<Loading/>}/>
             <Route path= "/result" element = {<Result/>}/>
             <Route path= "/admin/apfhskaktlWjd" element = {<Admin/>}/>
+            <Route path= "/KAMFNumCount" element = {<KAMFNumCount/>}/>
         </Routes>
     )
 }
