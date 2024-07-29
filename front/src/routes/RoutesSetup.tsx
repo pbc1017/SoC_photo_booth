@@ -6,7 +6,6 @@ import { Result } from "pages/Result";
 import { Select } from "pages/Select";
 
 import Home from "./Home";
-import { KAMFNumCount } from "pages/KAMFNumCount";
 
 export default function RouteSetup() {
   return (
@@ -15,7 +14,6 @@ export default function RouteSetup() {
       <Route path="/select" element={<Select />} />
       <Route path="/loading" element={<Loading />} />
       <Route path="/result" element={<Result />} />
-      <Route path="/KAMFNumCount" element={<KAMFNumCount />} />
     </Routes>
   );
 }
