@@ -1,28 +1,25 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { useEffect, useState } from "react";
-import {ImageCropper} from "components/ImageCropper";
-import {useImageCompress} from "hook/useImageCompress";
+import { ImageCropper } from "components/ImageCropper";
+import { useImageCompress } from "hook/useImageCompress";
 import { dataURItoFile } from "utils/common";
 import deleteButton from "assets/images/delete.png";
 import insertButton from "assets/images/insert.png";
 import "./index.css";
 
-interface Props{
+interface Props {
   className: string;
   widthIsBigger: boolean;
   index: number;
   onCompressImage: (index: number, compressedImage: string) => void;
 }
 
-export const PhotoEmpty :React.FC<Props> = ({ 
+export const PhotoEmpty: React.FC<Props> = ({
   className,
   widthIsBigger,
-  index, 
-  onCompressImage
+  index,
+  onCompressImage,
 }) => {
-
-
   const [uploadImage, setUploadImage] = useState<string | null>(null);
   const [compressedImage, setCompressedImage] = useState<string | null>(null);
   const { isLoading: isCompressLoading, compressImage } = useImageCompress();
@@ -48,12 +45,12 @@ export const PhotoEmpty :React.FC<Props> = ({
     if (!compressedImage) return;
     const imageUrl = URL.createObjectURL(compressedImage);
     setCompressedImage(imageUrl);
-    
+
     onCompressImage(index, imageUrl);
 
     const aspectRatioStyle = widthIsBigger
-    ? { width: '100%', paddingBottom: '75%' }
-    : { width: '75%', paddingBottom: '100%' };
+      ? { width: "100%", paddingBottom: "75%" }
+      : { width: "75%", paddingBottom: "100%" };
   };
 
   useEffect(() => {
@@ -67,9 +64,12 @@ export const PhotoEmpty :React.FC<Props> = ({
   const aspectRatioStyle = widthIsBigger
     ? { width: "200px", height: "150px" }
     : { width: "150px", height: "200px" };
-  
+
   return (
-    <div className={`PhotoEmpty-${className}-${index}`} style={aspectRatioStyle}>
+    <div
+      className={`PhotoEmpty-${className}-${index}`}
+      style={aspectRatioStyle}
+    >
       <div className="givenPhoto">
         {compressedImage ? (
           <img src={compressedImage} />
@@ -78,12 +78,24 @@ export const PhotoEmpty :React.FC<Props> = ({
             {isCompressLoading ? "이미지 압축 중.." : ""}
           </div>
         )}
-        <ImageCropper aspectRatio={aspectRatio} onCrop={handleUploadImage} hasImage={Boolean(compressedImage)}>
-          <button className={`image-upload-button ${compressedImage ? 'top-right' : 'center'}`}>
-            <img className="button-img" alt="camera" src={compressedImage ? deleteButton : insertButton} />
+        <ImageCropper
+          aspectRatio={aspectRatio}
+          onCrop={handleUploadImage}
+          hasImage={Boolean(compressedImage)}
+        >
+          <button
+            className={`image-upload-button ${
+              compressedImage ? "top-right" : "center"
+            }`}
+          >
+            <img
+              className="button-img"
+              alt="camera"
+              src={compressedImage ? deleteButton : insertButton}
+            />
           </button>
         </ImageCropper>
       </div>
     </div>
   );
-}
+};
