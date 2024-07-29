@@ -1,8 +1,14 @@
-from fastapi import FastAPI, File, UploadFile, Response
+from fastapi import FastAPI, File, UploadFile
+from fastapi.staticfiles import StaticFiles
 from PIL import Image
 import io
+import os
+import uuid
 
 app = FastAPI()
+
+# 정적 파일을 제공하기 위한 디렉토리 설정
+app.mount("/images", StaticFiles(directory="images"), name="images")
 
 @app.post("/create_collage/")
 async def create_collage(
@@ -17,7 +23,7 @@ async def create_collage(
     # 새 이미지 생성 (배경 크기에 맞춤)
     base_image = Image.new('RGBA', overlay.size, (255, 255, 255, 0))
     
-    # 사용자 이미지 위치 및 크기 정의 (예시 값, 실제 템플릿에 맞게 조정 필요)
+    # 사용자 이미지 위치 및 크기 정의
     positions = [
         (65, 78, 463, 689),   # (x, y, width, height)
         (552, 78, 463, 689),
@@ -35,12 +41,15 @@ async def create_collage(
     # 오버레이 (배경 템플릿) 적용
     final_image = Image.alpha_composite(base_image, overlay)
     
-    # 결과 이미지를 바이트 스트림으로 변환
-    img_byte_arr = io.BytesIO()
-    final_image.save(img_byte_arr, format='PNG')
-    img_byte_arr = img_byte_arr.getvalue()
+    # 결과 이미지를 파일로 저장
+    filename = f"{uuid.uuid4()}.png"
+    file_path = os.path.join("images", filename)
+    final_image.save(file_path, format='PNG')
     
-    return Response(content=img_byte_arr, media_type="image/png")
+    # 이미지 URL 생성
+    image_url = f"{app.url_path_for('images')}/{filename}"
+    
+    return {"image_url": image_url}
 
 if __name__ == "__main__":
     import uvicorn
