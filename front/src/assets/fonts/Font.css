@@ -26,3 +26,10 @@
   font-weight: 500;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Koverwatch';
+  src: url('https://download.blog.naver.com/open/22b73e8d9bcfc61a37d2b382bb532459f8a355b45b/doVMmoXFvGrfGylvQqy86UhKK2EtAq9OgNVAWa5XeMf1EN3-WgUy1o6F5Q_A5ndWClj5_piD36jrUJ13u3ODLA/koverwatch.ttf') format('ttf');
+  font-weight: 500;
+  font-style: normal;
+}

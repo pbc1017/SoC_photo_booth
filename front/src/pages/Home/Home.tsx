@@ -53,9 +53,11 @@ export const Home = (): JSX.Element => {
                 <Button className="button-1" text="시작하기" onClick={handleStartClick}/>
                 <Button className="button-2" text="도움말" onClick={handleHelpClick}/>
                 <h1 className="h-1">
-                    전산
+                    SA
                     <br />
-                    네컷
+                    SH
+                    <br />
+                    24
                 </h1>
                 <img className="element" alt="Element" src={home_example} />
                 <div className="numbers">{`만든 네컷:${makeCnt}장 인쇄한 네컷:${printCnt}장`}</div>
