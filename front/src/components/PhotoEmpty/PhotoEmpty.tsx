@@ -59,7 +59,7 @@ export const PhotoEmpty: React.FC<Props> = ({
     }
   }, [uploadImage]);
 
-  const aspectRatio = widthIsBigger ? 4 / 3 : 3 / 4;
+  const aspectRatio = widthIsBigger ? 463 / 689 : 689 / 463;
 
   const aspectRatioStyle = widthIsBigger
     ? { width: "200px", height: "150px" }
