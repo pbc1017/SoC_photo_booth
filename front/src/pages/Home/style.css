@@ -40,7 +40,7 @@
 
 .home .h-1 {
   color: #000000;
-  font-family: "NanumSquareRound-Light";
+  font-family: "Koverwatch";
   font-size: 12vh;
   font-size: calc(var(--vh, 1vh) * 12);
   font-weight: 300;
@@ -72,6 +72,6 @@
   left: 50% !important;
   transform: translateX(-50%);
   textAlign: 'center';
-  font-family: "NanumSquareRound-Light";
+  font-family: "Koverwatch";
   font-size: 12px;
 }
