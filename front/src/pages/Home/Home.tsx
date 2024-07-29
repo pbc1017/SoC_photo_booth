@@ -57,7 +57,7 @@ export const Home = (): JSX.Element => {
                     <br />
                     SH
                     <br />
-                    24
+                    <span className="green">24</span>
                 </h1>
                 <img className="element" alt="Element" src={home_example} />
                 <div className="numbers">{`만든 네컷:${makeCnt}장 인쇄한 네컷:${printCnt}장`}</div>
