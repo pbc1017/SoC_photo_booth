@@ -44,7 +44,7 @@
 }
 
 .options .Photo-1-0 {
-  position: absolute; 
+  position: absolute;
   width: 88.5% !important;
   height: 79% !important;
 }
@@ -55,7 +55,7 @@
 
 .options .Photo-2-0,
 .options .Photo-2-1 {
-  position: absolute; 
+  position: absolute;
   width: 77% !important;
   height: 38.5% !important;
 }
@@ -72,12 +72,12 @@
 .options .Photo-4-1,
 .options .Photo-4-2,
 .options .Photo-4-3 {
-  position: absolute; 
+  position: absolute;
   width: 42.5% !important;
   height: 37.83% !important;
 }
 .options .Photo-4-0 {
-  top: 17.5% !important;
+  top: 3.33% !important;
   left: 5% !important;
 }
 .options .Photo-4-1 {
@@ -85,7 +85,7 @@
   left: 52.5% !important;
 }
 .options .Photo-4-2 {
-  top: 58.83% !important;
+  top: 44.83% !important;
   left: 5% !important;
 }
 .options .Photo-4-3 {

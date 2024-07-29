@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import frame1 from "assets/images/frame_image_1.png";
 import frame2 from "assets/images/frame_image_2.png";
 import frame3 from "assets/images/frame_image_3.png";
@@ -11,16 +11,21 @@ import button1 from "assets/images/frame_button_1.png";
 import button2 from "assets/images/frame_button_2.png";
 import button3 from "assets/images/frame_button_3.png";
 import button4 from "assets/images/frame_button_4.png";
-import "./style.css"
+import "./style.css";
 
 interface SelectFrameProps {
   photoOption: number;
   compressedImages: string[];
   selectedFrameOption: number;
-  setSelectedFrameOption: React.Dispatch<React.SetStateAction<number>>
+  setSelectedFrameOption: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const SelectFrame: React.FC<SelectFrameProps> = ({ photoOption,compressedImages,selectedFrameOption,setSelectedFrameOption }) => {
+export const SelectFrame: React.FC<SelectFrameProps> = ({
+  photoOption,
+  compressedImages,
+  selectedFrameOption,
+  setSelectedFrameOption,
+}) => {
   const getPhotoEmptyCount = () => {
     switch (photoOption) {
       case 0:
@@ -35,24 +40,28 @@ export const SelectFrame: React.FC<SelectFrameProps> = ({ photoOption,compressed
         return 0;
     }
   };
-  
+
   const numPhoto = getPhotoEmptyCount();
   const photoList = Array.from({ length: numPhoto }, (_, index) => (
-    <img key={index}  className={`Photo-${numPhoto}-${index}`} src={compressedImages[index]}/>
+    <img
+      key={index}
+      className={`Photo-${numPhoto}-${index}`}
+      src={compressedImages[index]}
+    />
   ));
 
-  const frameArray = [frame1,frame2,frame3,frame4]
-  const coverArray = [cover1,cover2,cover3,cover4]
-  const buttonArray = [button1, button2, button3, button4]
+  const frameArray = [frame1, frame2, frame3, frame4];
+  const coverArray = [cover1, cover2, cover3, cover4];
+  const buttonArray = [button1, button2, button3, button4];
 
   return (
     <div className="options">
-      <div className='photosOut'/>
-      <div className='photos'>
-        <img className="photo-frame" src={frameArray[selectedFrameOption]}/>
+      <div className="photosOut" />
+      <div className="photos">
+        <img className="photo-frame" src={frameArray[selectedFrameOption]} />
         {photoList}
-        <img className="photo-frame" src={coverArray[selectedFrameOption]}/>
-      d</div>
+        <img className="photo-frame" src={coverArray[selectedFrameOption]} />d
+      </div>
       <div className="frame-buttons">
         {Array.from({ length: 4 }, (_, index) => (
           <img
@@ -60,7 +69,10 @@ export const SelectFrame: React.FC<SelectFrameProps> = ({ photoOption,compressed
             src={buttonArray[index]}
             key={index}
             onClick={() => setSelectedFrameOption(index)}
-            style={{ outline: selectedFrameOption === index ? '2px solid black' : 'none' }} // 현재 선택된 버튼만 윤곽선을 검정색으로 설정
+            style={{
+              outline:
+                selectedFrameOption === index ? "2px solid black" : "none",
+            }} // 현재 선택된 버튼만 윤곽선을 검정색으로 설정
           />
         ))}
       </div>
