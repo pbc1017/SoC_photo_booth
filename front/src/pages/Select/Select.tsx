@@ -191,12 +191,14 @@ export const Select = (): JSX.Element => {
     if (page === 4) {
       handleDownload();
       // navigate("/loading");
-    } else if (page === 1) {
+    } else if (page === 1 && selectedOption !== null) {
+      setPage(page + 1);
+    } else if (page === 2) {
       console.log(compressedImages.length);
       console.log((selectedOption as number) + 1);
       let imageNum = [1, 2, 4, 6];
       if (
-        compressedImages.length === imageNum[2] &&
+        compressedImages.length === imageNum[selectedOption as number] &&
         compressedImages[0] !== undefined
       ) {
         setPage(page + 1);
@@ -211,24 +213,31 @@ export const Select = (): JSX.Element => {
   const renderComponent = () => {
     if (page === 1) {
       return (
+        <SelectNumber
+          selectedOption={selectedOption}
+          handleOptionClick={handleOptionClick}
+        />
+      );
+    } else if (page === 2) {
+      return (
         <SelectPhoto
-          SelectOption={2}
+          SelectOption={selectedOption as number}
           setCompressedImages={setCompressedImages}
         />
       ); // SelectPhoto 컴포넌트 렌더링
-    } else if (page == 2) {
+    } else if (page == 3) {
       return (
         <SelectFrame
-          photoOption={2}
+          photoOption={selectedOption as number}
           compressedImages={compressedImages}
           selectedFrameOption={selectedFrameOption}
           setSelectedFrameOption={setSelectedFrameOption}
         />
       );
-    } else if (page == 3) {
+    } else if (page == 4) {
       return (
         <SelectFilter
-          photoOption={2}
+          photoOption={selectedOption as number}
           compressedImages={compressedImages}
           selectedFrameOption={selectedFrameOption}
           divRef={divRef}
@@ -242,8 +251,9 @@ export const Select = (): JSX.Element => {
     setCompressedImages([]);
   };
 
-  const h1s = ["사진 선택", "프레임 선택", "필터 선택"];
+  const h1s = ["사진 개수 선택", "사진 선택", "프레임 선택", "필터 선택"];
   const h2s = [
+    "원하는 사진 개수를 선택해주세요",
     "원하는 사진을 선택/촬영해주세요",
     "원하는 프레임을 선택해주세요",
     "원하는 필터를 선택해주세요",
@@ -260,7 +270,7 @@ export const Select = (): JSX.Element => {
             text="이전"
             onClick={handlePrevClick}
           />
-          <div className="text-wrapper-3">{page}/3</div>
+          <div className="text-wrapper-3">{page}/4</div>
           <Button
             className="button-instance-next"
             text="다음"
