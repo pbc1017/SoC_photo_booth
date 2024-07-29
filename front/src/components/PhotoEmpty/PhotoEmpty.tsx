@@ -70,32 +70,33 @@ export const PhotoEmpty: React.FC<Props> = ({
       className={`PhotoEmpty-${className}-${index}`}
       style={aspectRatioStyle}
     >
-      <div className="givenPhoto">
-        {compressedImage ? (
-          <img src={compressedImage} />
-        ) : (
-          <div className="cover">
-            {isCompressLoading ? "이미지 압축 중.." : ""}
-          </div>
-        )}
-        <ImageCropper
+      <ImageCropper
           aspectRatio={aspectRatio}
           onCrop={handleUploadImage}
           hasImage={Boolean(compressedImage)}
         >
-          <button
-            className={`image-upload-button ${
-              compressedImage ? "top-right" : "center"
-            }`}
-          >
-            <img
-              className="button-img"
-              alt="camera"
-              src={compressedImage ? deleteButton : insertButton}
-            />
-          </button>
-        </ImageCropper>
-      </div>
+        <div className="givenPhoto">
+          {compressedImage ? (
+            <img src={compressedImage} />
+          ) : (
+            <div className="cover">
+              {isCompressLoading ? "이미지 압축 중.." : ""}
+            </div>
+          )}
+          
+            <button
+              className={`image-upload-button ${
+                compressedImage ? "top-right" : "center"
+              }`}
+            >
+              <img
+                className="button-img"
+                alt="camera"
+                src={compressedImage ? deleteButton : insertButton}
+              />
+            </button>
+        </div>
+      </ImageCropper>
     </div>
   );
 };
