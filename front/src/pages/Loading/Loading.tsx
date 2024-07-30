@@ -140,7 +140,7 @@ export const Loading = (): JSX.Element => {
         <div className="title-2" style={{ textAlign: "center" }}>
           여러분 화이팅 하시고
           <br /><br />
-          문제 있으면 언제든
+          문의 사항이 있으면 언제든
           <br /><br />
           운영진 연락해 주세요!
         </div>
