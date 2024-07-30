@@ -8,6 +8,7 @@ import option1_1 from "assets/images/option1-1.png";
 import option2_1 from "assets/images/option2-1.png";
 import option3_1 from "assets/images/option3-1.png";
 import option4_1 from "assets/images/option4-1.png";
+import image24 from "assets/images/24.png";
 
 import "./style.css"
 
@@ -20,8 +21,8 @@ export const SelectNumber = ({
   selectedOption,
   handleOptionClick,
 }: SelectNumberProps): JSX.Element => {
-  const options = [option1, option2, option3, option4];
-  const selectedOptions = [option1_1, option2_1, option3_1, option4_1];
+  const options = [option1, option2, option3];
+  const selectedOptions = [option1_1, option2_1, option3_1];
   return (
     <div className="options">
       {options.map((option, index) => (
@@ -33,6 +34,7 @@ export const SelectNumber = ({
           onClick={() => handleOptionClick(index)}
         />
       ))}
+      <img src={image24} className={`option-3`}/>
     </div>
   );
 };
