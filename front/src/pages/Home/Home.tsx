@@ -60,8 +60,6 @@ export const Home = (): JSX.Element => {
                     <span className="green">24</span>
                 </h1>
                 <img className="element" alt="Element" src={home_example} />
-                <div className="numbers1">{`만든 네컷: ${makeCnt}장`}</div>
-                <div className="numbers2">{`인쇄한 네컷: ${printCnt}장`}</div>
                 <NotifyModal
                     isOpen={isModalOpen}
                     onRequestClose={(closeModal)}
