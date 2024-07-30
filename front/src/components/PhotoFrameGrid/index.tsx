@@ -1,1 +1,0 @@
-export { PhotoFrameGrid } from "./PhotoFrameGrid";

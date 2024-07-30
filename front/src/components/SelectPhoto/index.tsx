@@ -1,1 +1,0 @@
-export { SelectPhoto } from "./SelectPhoto"

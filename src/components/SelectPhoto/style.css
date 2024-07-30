@@ -1,0 +1,83 @@
+.options .PhotoEmpty-1-0 {
+  position: absolute; 
+  width: 100% !important;
+  height: 100% !important;
+}
+.options .PhotoEmpty-1-0 {
+  left: 0% !important;
+  top: 0% !important;
+}
+
+.options .PhotoEmpty-2-0,
+.options .PhotoEmpty-2-1 {
+  position: absolute; 
+  width: 87.11% !important;
+  height: 49% !important;
+  left: 6.44% !important;
+}
+.options .PhotoEmpty-2-0 {
+  top: 0% !important;
+}
+.options .PhotoEmpty-2-1 {
+  top: 51% !important;
+}
+
+.options .PhotoEmpty-4-0,
+.options .PhotoEmpty-4-1,
+.options .PhotoEmpty-4-2,
+.options .PhotoEmpty-4-3 {
+  position: absolute; 
+  width: 49% !important;
+  height: 49% !important;
+}
+.options .PhotoEmpty-4-0 {
+  top: 0% !important;
+  left: 0% !important;
+}
+.options .PhotoEmpty-4-1 {
+  top: 0% !important;
+  left: 51% !important;
+}
+.options .PhotoEmpty-4-2 {
+  top: 51% !important;
+  left: 0% !important;
+}
+.options .PhotoEmpty-4-3 {
+  top: 51% !important;
+  left: 51% !important;
+}
+
+.options .PhotoEmpty-6-0,
+.options .PhotoEmpty-6-1,
+.options .PhotoEmpty-6-2,
+.options .PhotoEmpty-6-3,
+.options .PhotoEmpty-6-4,
+.options .PhotoEmpty-6-5 {
+  position: absolute;
+  width: 49% !important;
+  height: 27.84% !important;
+}
+.options .PhotoEmpty-6-0 {
+  top: 8% !important;
+  left: 0% !important;
+}
+.options .PhotoEmpty-6-1 {
+  top: 8% !important;
+  left: 51% !important;
+}
+.options .PhotoEmpty-6-2 {
+  top: 37.5% !important;
+  left: 0% !important;
+}
+.options .PhotoEmpty-6-3 {
+  top: 37.5% !important;
+  left: 51% !important;
+}
+.options .PhotoEmpty-6-4 {
+  top: 67% !important;
+  left: 0% !important;
+}
+.options .PhotoEmpty-6-5 {
+  top: 67% !important;
+  left: 51% !important;
+}

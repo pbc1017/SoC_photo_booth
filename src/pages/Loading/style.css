@@ -1,0 +1,67 @@
+.home .input-number {
+  transform: translateX(-2.5%);
+  position: relative;
+  top: 60%;
+  height: 4%;
+  width: 182px;
+}
+.home .input-name {
+  transform: translateX(-2.5%);
+  position: relative;
+  height: 4%;
+  top: 61%;
+  width: 182px;
+}
+.home .element-loading {
+  height: 30%;
+  left: 50%;
+  transform: translateX(-53%);
+  object-fit: contain;
+  position: absolute;
+  top: 20%;
+  height: 300px;
+}
+.home .title-1 {
+  transform: translateX(-2.5%);
+  position: absolute;
+  font-size: 6vh;
+  top: 5%;
+  font-family: "Koverwatch";
+  color: #ffffff;
+}
+.home .title-2 {
+  transform: translateX(-2.5%);
+  position: absolute;
+  font-size: 2.2vh;
+  top: 50%;
+  font-family: "Koverwatch";
+  color: #ffffff; 
+}
+/*
+.home .h-1 {
+  color: #000000;
+  font-family: "NanumSquareRound-Light", Helvetica;
+  font-size: 12vh;
+  font-size: calc(var(--vh, 1vh) * 12);
+  font-weight: 300;
+  height: 10vh;
+  height: calc(var(--vh, 1vh) * 10);
+  left: 50%;
+  transform: translateX(-53%);
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 0vh;
+  width: 188px !important;
+}
+
+.home .element {
+  height: 30%;
+  left: 50%;
+  transform: translateX(-53%);
+  object-fit: contain;
+  position: absolute;
+  top: 40%;
+  width: 182px;
+} */

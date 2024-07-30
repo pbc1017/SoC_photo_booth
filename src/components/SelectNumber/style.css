@@ -1,0 +1,29 @@
+.options .option-0,
+.options .option-1,
+.options .option-2,
+.options .option-3 {
+  position: absolute;
+  object-fit: contain;
+  width: 49% !important;
+  height: 49% !important;
+}
+
+.options .option-0 {
+  top: 0%;
+  left: 0%;
+}
+
+.options .option-1 {
+  top: 0%;
+  left: 51%;
+}
+
+.options .option-2 {
+  top: 51%;
+  left: 0%;
+}
+
+.options .option-3 {
+  top: 51%;
+  left: 51%;
+}

@@ -1,0 +1,72 @@
+/* 
+  .container {
+    background-color: #caecff;
+    border: 1px none;
+    height: 1800px;
+    position: relative;
+    width: 1200px;
+  }
+  
+  .container .rectangle-4-1 {
+    background-color: #d9d9d9;
+    height: 765px;
+    left: 59px;
+    position: absolute;
+    top: 110px;
+    width: 510px;
+  }
+  
+  .container .rectangle-4-2 {
+    background-color: #d9d9d9;
+    height: 765px;
+    left: 631px;
+    position: absolute;
+    top: 110px;
+    width: 510px;
+  }
+  
+  .container .rectangle-4-3 {
+    background-color: #d9d9d9;
+    height: 765px;
+    left: 59px;
+    position: absolute;
+    top: 925px;
+    width: 510px;
+  }
+  
+  .container .rectangle-4-4 {
+    background-color: #d9d9d9;
+    height: 765px;
+    left: 631px;
+    position: absolute;
+    top: 925px;
+    width: 510px;
+  }
+
+
+  .container .rectangle-2-1 {
+    background-color: #d9d9d9;
+    height: 765px;
+    left: 90px;
+    position: absolute;
+    top: 109px;
+    width: 1020px;
+  }
+  
+  .container .rectangle-2-2 {
+    background-color: #d9d9d9;
+    height: 765px;
+    left: 90px;
+    position: absolute;
+    top: 927px;
+    width: 1020px;
+  }
+
+  .container .rectangle-1-1 {
+    background-color: #d9d9d9;
+    height: 1530px;
+    left: 90px;
+    position: relative;
+    top: 135px;
+    width: 1020px;
+  } */

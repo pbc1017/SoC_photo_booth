@@ -1,0 +1,26 @@
+.button {
+  align-items: center;
+  background-color: #42C678;
+  display: flex;
+  justify-content: center;
+  padding: 1.5vh 10vh;
+  padding: calc(var(--vh, 1vh) * 1.5) calc(var(--vh, 1vh) * 9);
+  /* margin-left: -4vh;
+  margin-left: calc(var(--vh, 1vh) * -4); */
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+}
+
+.button .text-wrapper {
+  color: #000000;
+  font-family: "Koverwatch";
+  font-size: 3vh;
+  font-weight: 200;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}

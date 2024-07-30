@@ -1,0 +1,1 @@
+export { PhotoEmpty } from "./PhotoEmpty";

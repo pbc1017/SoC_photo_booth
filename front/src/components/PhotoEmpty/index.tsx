@@ -1,1 +1,0 @@
-export { PhotoEmpty } from "./PhotoEmpty";

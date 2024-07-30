@@ -1,1 +1,0 @@
-export { WarningModal } from "./WarningModal";
