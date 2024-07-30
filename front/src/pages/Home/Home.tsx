@@ -60,11 +60,13 @@ export const Home = (): JSX.Element => {
                     <span className="green">24</span>
                 </h1>
                 <img className="element" alt="Element" src={home_example} />
-                <div className="numbers">{`만든 네컷:${makeCnt}장 인쇄한 네컷:${printCnt}장`}</div>
+                <div className="numbers1">{`만든 네컷: ${makeCnt}장`}</div>
+                <div className="numbers2">{`인쇄한 네컷: ${printCnt}장`}</div>
                 <NotifyModal
                     isOpen={isModalOpen}
                     onRequestClose={(closeModal)}
-                    message={"2023 KAMF 한사랑전산악회 부스에서 운영중인 웹페이지입니다. 사진 인화를 원하시면 부스를 방문해주세요. 감사합니다."}
+                    message={"SPARCS AI Startup Hackathon 2024에서 운영중인 웹페이지입니다. 팀원들과 즐거운 추억을 쌓을 수 있는 행사가 될 수 있기를 바랍니다. 감사합니다."}
+                    sign={"- SPARCS 기획팀"}
                 />
             </div>
         </div>

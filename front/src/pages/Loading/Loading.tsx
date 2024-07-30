@@ -114,7 +114,7 @@ export const Loading = (): JSX.Element => {
   return (
     <div className="home">
       <div className="div">
-        <input
+        {/*<input
           type="text"
           placeholder="학번을 입력하세요"
           value={studentNumber.value}
@@ -127,26 +127,29 @@ export const Loading = (): JSX.Element => {
           value={name.value}
           onChange={(e) => handleInputChange(e, "name")}
           className="input-name"
-        />
+        />*/}
         <Toaster />
         <Button
           className="button-2"
-          text="건너뛰기"
+          text="결과물 보기"
           onClick={handleSkipClick}
         />
         <img className="element-loading" alt="Element" src={loading} />{" "}
         {/* 넘겨받은 이미지 src 사용 */}
         <div className="title-1">만드는중</div>
         <div className="title-2" style={{ textAlign: "center" }}>
-          사진을 인쇄하려면 학번(전화번호)과
-          <br />
-          이름을 입력해주세요.
+          여러분 화이팅 하시고
+          <br /><br />
+          문제 있으면 언제든
+          <br /><br />
+          운영진 연락해 주세요!
         </div>
       </div>
       <NotifyModal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         message={warningMessage}
+        sign={""}
       />
     </div>
   );

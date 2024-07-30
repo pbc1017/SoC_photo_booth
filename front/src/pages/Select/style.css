@@ -1,5 +1,5 @@
 .select {
-  background-color: #ffffff;
+  background-color: #222222;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -10,7 +10,7 @@
 }
 
 .select .div {
-  background-color: #ffffff;
+  background-color: #222222;
   border: 1px none;
   height: 100vh; /* 혹시나 Custom Property 지원 안하는 브라우저를 위한 복귀점(Fallback) */
   height: calc(var(--vh, 1vh) * 100);
@@ -19,7 +19,7 @@
 }
 
 .select .h-1 {
-  color: #000000;
+  color: #42C678;
   font-family: "MBC1961GulimM";
   font-size: 4vh !important;
   font-weight: 700;
@@ -36,7 +36,7 @@
 }
 
 .select .text-wrapper-2 {
-  color: #000000;
+  color: #ffffff;
   font-family: "MBC1961GulimM";
   font-size: 2.5vh !important;
   font-weight: 700;
@@ -78,7 +78,7 @@
 }
 
 .select .text-wrapper-3 {
-  color: #000000;
+  color: #ffffff;
   font-family: "MBC1961GulimM";
   font-size: 3vh !important;
   font-weight: 400;
@@ -97,6 +97,6 @@
   left: calc(50% + 2vh);
   transform: translateX(-26vh) !important;
   position: relative;
-  background: #ffffff; /* 배경색 추가, 필요에 따라 변경 */
+  background: #222222; /* 배경색 추가, 필요에 따라 변경 */
   overflow: hidden; /* 내부 내용이 넘치지 않게 함 */
 }

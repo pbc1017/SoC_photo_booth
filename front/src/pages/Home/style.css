@@ -62,21 +62,33 @@
 }
 
 .home .element {
-  height: 30%;
+  height: 23%;
   left: 50%;
   transform: translateX(-53%);
   object-fit: contain;
   position: absolute;
-  top: 40%;
+  top: 48.5%;
   width: 150px;
 }
 
-.home .numbers {
+.home .numbers1 {
+  position: absolute;
+  top: 93% !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+  text-align: 'center';
+  font-family: "Koverwatch";
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.home .numbers2 {
   position: absolute;
   top: 95% !important;
   left: 50% !important;
   transform: translateX(-50%);
-  textAlign: 'center';
+  text-align: 'center';
   font-family: "Koverwatch";
   font-size: 12px;
+  color: #ffffff;
 }
