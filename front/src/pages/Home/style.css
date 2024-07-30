@@ -1,0 +1,77 @@
+.home {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  position: fixed;
+  align-items: center; 
+  margin: 0 -8px;
+}
+
+.home .div {
+  background-color: #ffffff;
+  border: 1px none;
+  height: 100vh; /* 혹시나 Custom Property 지원 안하는 브라우저를 위한 복귀점(Fallback) */
+  height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+  width: 400px !important;
+  display: flex; /* flexbox를 활성화 */
+  flex-direction: column; /* 자식 요소들을 세로로 배열 */
+  align-items: center; /* 자식 요소들을 수평 중앙으로 정렬 */
+}
+
+.home .button-1 {
+  left: 50%;
+  transform: translateX(-53%);
+  width: 20%;
+  position: absolute !important;
+  top: 74% !important;
+}
+
+.home .button-2 {
+  background-color: #e4f0ff !important;
+  left: 50%;
+  transform: translateX(-53%);
+  width: 20%;
+  position: absolute !important;
+  top: 83% !important;
+}
+
+.home .h-1 {
+  color: #000000;
+  font-family: "NanumSquareRound-Light";
+  font-size: 12vh;
+  font-size: calc(var(--vh, 1vh) * 12);
+  font-weight: 300;
+  height: 10vh;
+  height: calc(var(--vh, 1vh) * 10);
+  left: 50%;
+  transform: translateX(-53%);
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 0vh;
+  width: 188px !important;
+}
+
+.home .element {
+  height: 30%;
+  left: 50%;
+  transform: translateX(-53%);
+  object-fit: contain;
+  position: absolute;
+  top: 40%;
+  width: 150px;
+}
+
+.home .numbers {
+  position: absolute;
+  top: 95% !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+  textAlign: 'center';
+  font-family: "NanumSquareRound-Light";
+  font-size: 12px;
+}
